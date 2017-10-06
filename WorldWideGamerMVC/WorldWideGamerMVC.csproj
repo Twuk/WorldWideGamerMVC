@@ -254,7 +254,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\SpelController.cs" />
+    <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\SpelerController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -276,6 +276,7 @@
     <Compile Include="Service\wwgService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\EditGamerViewModel.cs" />
+    <Compile Include="ViewModels\GamesViewModel.cs" />
     <Compile Include="ViewModels\SpelersViewModel.cs" />
     <Compile Include="ViewModels\SpelerUserNameGameViewModel.cs" />
     <Compile Include="ViewModels\SpelerViewModel.cs" />
@@ -437,12 +438,10 @@
     <Content Include="Views\Speler\EditGamer.cshtml" />
     <Content Include="Views\Speler\GamersOverzicht.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
-    <Content Include="Views\Home\GamesOverzicht.cshtml" />
+    <Content Include="Views\Game\GamesOverzicht.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Role\" />
-    <Folder Include="Views\Spel\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
