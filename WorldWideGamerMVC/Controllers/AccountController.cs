@@ -150,6 +150,7 @@ namespace WorldWideGamerMVC.Controllers
         {
             ViewBag.Name = new SelectList(databaseConnectie.Roles.Where(u => !u.Name.Contains("Admin"))
                                             .ToList(), "Name", "Name");
+            Dictionary<GameViewModel,bool> speeltGamesDict = new Dictionary<GameViewModel,bool>();
             List<GameViewModel> games = new List<GameViewModel>();
             foreach (var game in gameBal.getGames())
             {
@@ -158,9 +159,11 @@ namespace WorldWideGamerMVC.Controllers
                 gameView.naam = game.Naam;
                 gameView.regels = game.Regels;
                 games.Add(gameView);
+                speeltGamesDict.Add(gameView,false);
             }
             EditGamerViewModel register = new EditGamerViewModel();
             register.games = games;
+            register.speeltGames = speeltGamesDict;
             return View(register);
         }
 
@@ -169,7 +172,7 @@ namespace WorldWideGamerMVC.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(EditGamerViewModel model, List<int> gameSelecter)
+        public async Task<ActionResult> Register(RegisterGamerViewModel model, List<int> gameSelecter)
         {
             if (ModelState.IsValid)
             {

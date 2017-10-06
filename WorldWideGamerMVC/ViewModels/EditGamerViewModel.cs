@@ -10,6 +10,25 @@ namespace WorldWideGamerMVC.ViewModels
     public class EditGamerViewModel
     {
         public string UserId { get; set; }
+        
+        [Required]
+        [Display(Name = "Voornaam")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "AchterNaam")]
+        public string LastName { get; set; }
+
+        public Dictionary<GameViewModel,bool> speeltGames { get; set; }
+        public List<GameViewModel> games { get; set; }
+        
+        [Display(Name = "UserName")]
+        public List<SpelerUserNamePerGame> userNamePerSpel { get; set; }
+        
+    }
+    public class RegisterGamerViewModel
+    {
+        public string UserId { get; set; }
 
         [Required]
         [EmailAddress]
@@ -35,12 +54,12 @@ namespace WorldWideGamerMVC.ViewModels
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
-
+        
         public List<GameViewModel> games { get; set; }
 
         [Required]
         [Display(Name = "UserName")]
         public List<SpelerUserNamePerGame> userNamePerSpel { get; set; }
-        
+
     }
 }

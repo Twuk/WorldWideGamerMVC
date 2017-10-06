@@ -13,40 +13,32 @@ using WorldWideGamerMVC.Models.HulpMethods;
 
 namespace WorldWideGamerMVC.Controllers
 {
-    public class HomeController : Controller
+    public class GameController : Controller
     {
         private ApplicationDbContext databaseConnectie;
         private GameBusinessLayer gameBal;
         private GamerBusinessLayer gamerBal;
         private FillViewsMethods fillView;
 
-        public HomeController()
+        public GameController()
         {
             databaseConnectie = new ApplicationDbContext();
             gameBal = new GameBusinessLayer(databaseConnectie);
             gamerBal = new GamerBusinessLayer(databaseConnectie);
             fillView = new FillViewsMethods(gameBal, gamerBal);
         }
-        public ActionResult Index()
+
+        public ActionResult GameOverzicht()
         {
-            
             return View();
         }
 
-        public ActionResult About()
+        [Authorize]
+        public ActionResult EditGames()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
 
-            return View();
-        }
-      
-      
     }
 }

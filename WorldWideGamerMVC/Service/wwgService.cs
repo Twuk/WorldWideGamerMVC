@@ -52,21 +52,28 @@ namespace WorldWideGamerMVC.Service
 
         public void PostGamer(Speler gamer)
         {
-            /*
-                var original = _ApplicationDb.Spelers.Find(gamer.UserId);
+            
+            var original = _ApplicationDb.Spelers.Find(gamer.UserId);
 
-                if (original != null)
+            if (original != null)
+            {
+                original.FirstName = gamer.FirstName;
+                original.LastName = gamer.LastName;
+                //Removed eerst alles en voegt dan terug toe
+                //Heb nog te weinig kennis van EF om met niet unique foreign keys update te doen
+                var speeltGames = _ApplicationDb.SpelerGames.Where(u => u.UserId == original.UserId);
+                foreach(SpelerUserNamePerGame obj in speeltGames)
                 {
-                    original.FirstName = gamer.FirstName;
-                    original.LastName = gamer.LastName;
-                   // original.SpeeltGames = gamer.SpeeltGames;
-                    _ApplicationDb.SaveChanges();
+                    _ApplicationDb.SpelerGames.Remove(obj);
                 }
+                original.SpeeltGames = gamer.SpeeltGames;
+                _ApplicationDb.SaveChanges();
+            }
             else
             {
                 throw new Exception("User bestaat niet");
             }
-            */
+            
             /*
             if (this.OpenConnection() == true)
             {

@@ -16,7 +16,6 @@
                     <th>Voornaam</th>
                     <th>Achternaam</th>
                     <th>Games</th>
-                    <th>Punten</th>
                 </tr>
             </thead>
             <tfoot>
@@ -35,10 +34,10 @@
                         <th>@if (User.IsInRole("Admin"))
                         {
                             @item.UserId<br />
-                        <a href="@Url.Action("editGamer","Home",new { id = @item.UserId })">
+                        <a href="@Url.Action("editGamer","Speler",new { id = @item.UserId })">
                             <span class="glyphicon glyphicon-wrench"></span>
                         </a><br />
-                        <a href="@Url.Action("deleteGamer","Home",new { id = @item.UserId })" onclick="return confirm('Are you sure you want to Delete?')">
+                        <a href="@Url.Action("deleteGamer","Speler",new { id = @item.UserId })" onclick="return confirm('Are you sure you want to Delete?')">
                             <span class="glyphicon glyphicon-remove"></span>
                         </a>
                         }
