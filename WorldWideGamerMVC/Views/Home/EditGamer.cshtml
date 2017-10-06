@@ -1,0 +1,87 @@
+﻿@using WorldWideGamerMVC.ViewModels
+@model WorldWideGamerMVC.ViewModels.EditGamerViewModel
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("SaveGamer", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <h4>Create a new account.</h4>
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(m => m.FirstName, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.LastName, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.games, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <select name="gameSelecter[]" class="selectpicker" multiple id="gespeeldeGames">
+                @foreach (GameViewModel entry in Model.games)
+                {
+                    <option value="@entry.gameId">@entry.naam</option>
+                }
+            </select>
+        </div>
+    </div>
+        <div class="col-md-12">
+            <label class="control-label">Usernames</label>
+        </div>
+            <div>
+
+                @for (int i = 0; i < ((Model != null && Model.games != null) ? Model.games.Count : 1); i++)
+                {
+
+                    <div class="form-group" id=@Model.games[i].gameId style="visibility:hidden">
+                        <input type="hidden" name="userNamePerSpel.Index" value="@(i+1)" />
+                        @Html.Label(Model.games[i].naam, new { @class = "col-md-2 control-label" })
+                        @Html.HiddenFor(m => m.userNamePerSpel[i].GameId, new { Value = Model.games[i].gameId })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.userNamePerSpel[i].userName, new { @class = "form-control" })
+                        </div>
+                    </div>
+                }
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" class="btn btn-default" value="Register" />
+                </div>
+            </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+@section Scripts {
+    <script type="text/javascript">
+
+                    $('#gespeeldeGames').on('changed.bs.select', function (e) {
+                        var values = document.getElementById('gespeeldeGames');
+                        for (var i = 0; i < values.length; i++) {
+                            var ele = document.getElementById(values.options[i].value);
+                            ele.style.visibility = "hidden";
+                        }
+
+                        $('select.selectpicker').each(function () {
+                            var array = $(this).val();
+                            var arrayLength = array.length;
+                            for (var i = 0; i < arrayLength; i++) {
+                                var ele = document.getElementById(array[i]);
+                                ele.style.visibility = "visible";
+                            }
+
+                        });
+                    });
+    </script>
+    @Scripts.Render("~/bundles/jqueryval")
+}
