@@ -1,5 +1,5 @@
 ﻿@using WorldWideGamerMVC.ViewModels
-@model WorldWideGamerMVC.ViewModels.GameViewModel
+@model WorldWideGamerMVC.ViewModels.GamesViewModel
     @{
         ViewBag.Title = "GameOverzicht";
     }
@@ -9,21 +9,73 @@
 <hr />
 <div>
     <div class="table-responsive">
-        <table id="example" class="table table-striped table-bordered table-hover table-condensed sortable">
+        <table id="example" class="table table-striped table-bordered table-condensed sortable">
             <thead>
                 <tr>
                     <th></th>
-                    <th>Voornaam</th>
-                    <th>Achternaam</th>
-                    <th>Games</th>
+                    <th>Naam</th>
+                    <th>Regels</th>
+                    <th>Spelers</th>
                 </tr>
             </thead>
+            <tbody>
+                @foreach (GameViewModel item in Model.Games)
+                {
+                    <tr>
+
+                        <td>
+                            @if (User.IsInRole("Admin"))
+                        {
+                            @item.gameId<br />
+                            <a href="@Url.Action("editGamer","Speler",new { id = @item.gameId })">
+                                <span class="glyphicon glyphicon-wrench"></span>
+                            </a><br />
+                            <a href="@Url.Action("deleteGamer","Speler",new { id = @item.gameId })" onclick="return confirm('Are you sure you want to Delete?')">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </a>
+                        }
+                    </td>
+                    <th>@item.naam</th>
+                    <td>@item.regels</td>
+                    <td>
+                        <table id="games" class="table table-striped table-bordered" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>UserName speler</th>
+                                    <th>Naam speler</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (item.spelers.Count != 0 )
+                                {
+                                    foreach (SpelerUserNameGameViewModel game in item.spelers)
+                                    {
+                                    <tr>
+                                        <th>@game.Username</th>
+                                        <td>@game.SpelerViewModel.VoorNaam @game.SpelerViewModel.AchterNaam</td>
+                                    </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <th></th>
+                                        <td></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                }
+            </tbody>
             <tfoot>
                 <tr>
                     <th></th>
-                    <th>Voornaam</th>
-                    <th>Achternaam</th>
-                    <th>Games</th>
+                    <th>Naam</th>
+                    <th>Regels</th>
+                    <th>Spelers</th>
                 </tr>
             </tfoot>
             <tbody>

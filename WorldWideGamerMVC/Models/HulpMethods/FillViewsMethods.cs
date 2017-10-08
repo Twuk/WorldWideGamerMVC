@@ -11,13 +11,13 @@ namespace WorldWideGamerMVC.Models.HulpMethods
     
     public class FillViewsMethods
     {
-        private GameBusinessLayer gameBal;
-        private GamerBusinessLayer gamerBal;
+        private GameBusinessLayer gameBalCon { get; set; }
+        private GamerBusinessLayer gamerBalCon { get; set; }
 
         public FillViewsMethods(GameBusinessLayer gameBal, GamerBusinessLayer gamerBal)
         {
-            gameBal = gameBal;
-            gamerBal = gamerBal;
+            gameBalCon = gameBal;
+            gamerBalCon = gamerBal;
         }
 
         public GameViewModel FillGameViewModel(Game game)
@@ -26,6 +26,7 @@ namespace WorldWideGamerMVC.Models.HulpMethods
             gameViewModel.gameId = game.GameId;
             gameViewModel.naam = game.Naam;
             gameViewModel.regels = game.Regels;
+            gameViewModel.spelers = new List<SpelerUserNameGameViewModel>();
             return gameViewModel;
         }
 
@@ -34,28 +35,33 @@ namespace WorldWideGamerMVC.Models.HulpMethods
             SpelerViewModel spelerViewModel = new SpelerViewModel();
             spelerViewModel.VoorNaam = speler.FirstName;
             spelerViewModel.AchterNaam = speler.LastName;
+            spelerViewModel.GespeeldeGames = new List<SpelerUserNameGameViewModel>();
             return spelerViewModel;
         }
 
         public SpelerUserNameGameViewModel FillUserNameViewModel(SpelerUserNamePerGame username)
         {
             SpelerUserNameGameViewModel userNameViewModel = new SpelerUserNameGameViewModel();
-            if (username.speler != null)
+            if (username.speler != null && username.Game != null)
             {
-                userNameViewModel.GameViewModel = FillGameViewModel(gameBal.getGame(username.GameId));
+                userNameViewModel.GameViewModel = FillGameViewModel(gameBalCon.getGame(username.GameId));
+                userNameViewModel.Username = username.userName;
+                userNameViewModel.SpelerViewModel = FillSpelerViewModel(gamerBalCon.GetGamer(username.UserId));
+            }
+            else if (username.speler != null && username.Game == null)
+            {
+                userNameViewModel.GameViewModel = FillGameViewModel(gameBalCon.getGame(username.GameId));
                 userNameViewModel.Username = username.userName;
             }
-            else if (username.Game != null)
+            else if (username.Game != null && username.speler == null)
             {
 
-                userNameViewModel.SpelerViewModel = FillSpelerViewModel(gamerBal.GetGamer(username.UserId));
+                userNameViewModel.SpelerViewModel = FillSpelerViewModel(gamerBalCon.GetGamer(username.UserId));
                 userNameViewModel.Username = username.userName;
             }
             else
             {
-                userNameViewModel.GameViewModel = FillGameViewModel(gameBal.getGame(username.GameId));
                 userNameViewModel.Username = username.userName;
-                userNameViewModel.SpelerViewModel = FillSpelerViewModel(gamerBal.GetGamer(username.UserId));
             }
             return userNameViewModel;
         }

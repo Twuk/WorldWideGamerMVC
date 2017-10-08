@@ -21,9 +21,7 @@ namespace WorldWideGamerMVC.Migrations
 
         protected override void Seed(WorldWideGamerMVC.Models.ApplicationDbContext context)
         {
-            
-            using (context = new ApplicationDbContext())
-            {
+          
                 /*
             var store = new UserStore<ApplicationUser>(context);
             var manager = new ApplicationUserManager(store);
@@ -56,7 +54,7 @@ namespace WorldWideGamerMVC.Migrations
                 context.Games.Add(spel5);
                 context.SaveChanges();
        */
-            }
+            
         }
     }
 }

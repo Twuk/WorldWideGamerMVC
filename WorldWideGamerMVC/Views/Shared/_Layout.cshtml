@@ -16,7 +16,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>-
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
                 </button>
                 @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
@@ -26,6 +27,8 @@
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     <li>@Html.ActionLink("Spelers", "GamersOverzicht", "Speler")</li>
+                    <li>@Html.ActionLink("Games", "GamesOverzicht", "Game")</li>
+
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

@@ -14,6 +14,7 @@ using WorldWideGamerMVC.ViewModels;
 using System.Collections.Generic;
 using WorldWideGamerMVC.Models.BusinessLayer;
 using WorldWideGamerMVC.Models.Tables;
+using WorldWideGamerMVC.ViewModels.Gamer;
 
 namespace WorldWideGamerMVC.Controllers
 {
@@ -150,7 +151,6 @@ namespace WorldWideGamerMVC.Controllers
         {
             ViewBag.Name = new SelectList(databaseConnectie.Roles.Where(u => !u.Name.Contains("Admin"))
                                             .ToList(), "Name", "Name");
-            Dictionary<GameViewModel,bool> speeltGamesDict = new Dictionary<GameViewModel,bool>();
             List<GameViewModel> games = new List<GameViewModel>();
             foreach (var game in gameBal.getGames())
             {
@@ -159,11 +159,9 @@ namespace WorldWideGamerMVC.Controllers
                 gameView.naam = game.Naam;
                 gameView.regels = game.Regels;
                 games.Add(gameView);
-                speeltGamesDict.Add(gameView,false);
             }
-            EditGamerViewModel register = new EditGamerViewModel();
+            RegisterGamerViewModel register = new RegisterGamerViewModel();
             register.games = games;
-            register.speeltGames = speeltGamesDict;
             return View(register);
         }
 

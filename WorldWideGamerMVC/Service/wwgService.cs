@@ -128,8 +128,22 @@ namespace WorldWideGamerMVC.Service
         {
             
             List<Game> games = new List<Game>();
+            List<SpelerUserNamePerGame> allUserNames = new List<SpelerUserNamePerGame>();
+            List<SpelerUserNamePerGame> userNames = new List<SpelerUserNamePerGame>();
+            foreach (var userName in _ApplicationDb.SpelerGames)
+            {
+                allUserNames.Add(userName);
+            }
+
             foreach (var game in _ApplicationDb.Games)
             {
+                userNames = new List<SpelerUserNamePerGame>();
+                foreach (var userNameGame in allUserNames.Where(u => u.GameId == game.GameId))
+                {
+                    
+                    userNames.Add(userNameGame);
+                }
+                game.Spelers = userNames;
                 games.Add(game);
             }
             

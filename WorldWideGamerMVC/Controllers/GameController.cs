@@ -28,9 +28,22 @@ namespace WorldWideGamerMVC.Controllers
             fillView = new FillViewsMethods(gameBal, gamerBal);
         }
 
-        public ActionResult GameOverzicht()
+        public ActionResult GamesOverzicht()
         {
-            return View();
+            List<GameViewModel> gameModels = new List<GameViewModel>();
+            GamesViewModel spelenOverzicht = new GamesViewModel();
+            List<Game> games = gameBal.getGames();
+            foreach(Game spel in games)
+            {
+                GameViewModel gameView = fillView.FillGameViewModel(spel);
+                foreach(SpelerUserNamePerGame user in spel.Spelers){
+                    SpelerUserNameGameViewModel userNameView = fillView.FillUserNameViewModel(user);
+                    gameView.spelers.Add(userNameView);
+                }
+                gameModels.Add(gameView);
+            }
+            spelenOverzicht.Games = gameModels;
+            return View(spelenOverzicht);
         }
 
         [Authorize]
