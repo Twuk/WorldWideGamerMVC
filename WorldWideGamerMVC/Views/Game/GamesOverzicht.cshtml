@@ -27,10 +27,10 @@
                             @if (User.IsInRole("Admin"))
                         {
                             @item.gameId<br />
-                            <a href="@Url.Action("editGamer","Speler",new { id = @item.gameId })">
+                            <a href="@Url.Action("editGame","Game",new { gameId = @item.gameId })">
                                 <span class="glyphicon glyphicon-wrench"></span>
                             </a><br />
-                            <a href="@Url.Action("deleteGamer","Speler",new { id = @item.gameId })" onclick="return confirm('Are you sure you want to Delete?')">
+                            <a href="@Url.Action("deleteGame","Game",new { gameId = @item.gameId })" onclick="return confirm('Are you sure you want to Delete?')">
                                 <span class="glyphicon glyphicon-remove"></span>
                             </a>
                         }

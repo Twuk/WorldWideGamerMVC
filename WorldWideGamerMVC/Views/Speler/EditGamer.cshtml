@@ -3,7 +3,7 @@
 
 <h2>@ViewBag.Title</h2>
 
-@using (Html.BeginForm("SaveGamer", "Home", FormMethod.Post))
+@using (Html.BeginForm("SaveGamer", "Speler", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     <h4>Create a new account.</h4>
@@ -69,7 +69,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "GamersOverzicht")
 </div>
 @section Scripts {
     <script type="text/javascript">

@@ -32,7 +32,7 @@
                         
                         <th>@if (User.IsInRole("Admin"))
                         {
-                            @item.UserId<br />
+                          <br />
                         <a href="@Url.Action("editGamer","Speler",new { id = @item.UserId })">
                             <span class="glyphicon glyphicon-wrench"></span>
                         </a><br />

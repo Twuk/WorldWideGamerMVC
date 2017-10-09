@@ -38,6 +38,7 @@ namespace WorldWideGamerMVC.Controllers
             {
                 SpelerViewModel gamerViewModel = new SpelerViewModel();
                 List<SpelerUserNameGameViewModel> userNamesGameViewModels = new List<SpelerUserNameGameViewModel>();
+                gamerViewModel.UserId = speler.UserId;
                 gamerViewModel.VoorNaam = speler.FirstName;
                 gamerViewModel.AchterNaam = speler.LastName;
                 foreach (SpelerUserNamePerGame obj in speler.SpeeltGames)

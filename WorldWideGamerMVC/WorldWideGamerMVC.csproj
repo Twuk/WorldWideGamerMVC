@@ -275,6 +275,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\wwgService.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\Game\EditGameViewModel.cs" />
     <Compile Include="ViewModels\Speler\EditGamerViewModel.cs" />
     <Compile Include="ViewModels\Speler\RegisterGamerViewModel.cs" />
     <Compile Include="ViewModels\Game\GamesViewModel.cs" />
@@ -440,6 +441,7 @@
     <Content Include="Views\Speler\GamersOverzicht.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Game\GamesOverzicht.cshtml" />
+    <Content Include="Views\Game\EditGame.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

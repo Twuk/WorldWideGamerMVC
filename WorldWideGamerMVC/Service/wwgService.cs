@@ -40,6 +40,7 @@ namespace WorldWideGamerMVC.Service
             return spelers;
         }
 
+        
         public Speler GetGamer(string gamerId)
         {
             var query = from p in _ApplicationDb.Spelers
@@ -73,33 +74,6 @@ namespace WorldWideGamerMVC.Service
             {
                 throw new Exception("User bestaat niet");
             }
-            
-            /*
-            if (this.OpenConnection() == true)
-            {
-                MySqlCommand comm = connection.CreateCommand();
-                comm.CommandText = "INSERT INTO gamers(voornaam,achternaam,totaalpunten) VALUES(@firstname, @lastname,@points)";
-                comm.Parameters.Add("@firstname", gamer.voorNaam);
-                comm.Parameters.Add("@lastname", gamer.achterNaam);
-                comm.Parameters.Add("@points", gamer.totaalPunten);
-                comm.ExecuteNonQuery();
-
-                comm.CommandText = "select Last_insert_ID()as id";
-
-                int gamerId = (int)comm.LastInsertedId;
-                if (gamerId != null)
-                {
-                    foreach (Game spel in gamer.gespeeldeGames)
-                    {
-                        comm.CommandText = "INSERT INTO gamers_games(gamerId,gameId) VALUES(" + gamerId + ", " + spel.gameId + ")";
-                        comm.ExecuteNonQuery();
-                    }
-                }
-
-                connection.Close();
-            }
-            */
-
         }
 
 
@@ -148,46 +122,6 @@ namespace WorldWideGamerMVC.Service
             }
             
             return games;
-
-
-            /*
-            string query = "SELECT * FROM games";
-
-            //Create a list to store the result
-            List<Game> list = new List<Game>();
-
-            //Open connection
-            if (this.OpenConnection() == true)
-            {
-                //Create Command
-                MySqlCommand cmd = new MySqlCommand(query, connection);
-                //Create a data reader and Execute the command
-                MySqlDataReader dataReader = cmd.ExecuteReader();
-
-                //Read the data and store them in the list
-                while (dataReader.Read())
-                {
-                    Game game = new Game();
-                    game.gameId = (int)dataReader["gameId"];
-                    game.naam = (string)dataReader["naam"];
-                    game.regels = (string)dataReader["regels"];
-                    list.Add(game);
-                }
-
-                //close Data Reader
-                dataReader.Close();
-
-                //close Connection
-                this.CloseConnection();
-
-                //return list to be displayed
-                return list;
-                
-            }
-            else
-            {
-                return list;
-            }*/
         }
 
         public Game GetGame(int gameId)
@@ -195,6 +129,21 @@ namespace WorldWideGamerMVC.Service
 
             var spel = _ApplicationDb.Games.First(g => g.GameId == gameId);
             return spel;
+        }
+
+        public void SetSpelRegels(int gameId, string regels)
+        {
+            var original = _ApplicationDb.Games.Find(gameId);
+
+            if (original != null)
+            {
+                original.Regels = regels;
+                _ApplicationDb.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("Spel bestaat niet");
+            }
         }
 
 

@@ -7,6 +7,7 @@ namespace WorldWideGamerMVC.ViewModels
 {
     public class GameViewModel
     {
+        
         public int gameId { get; set; }
         public string naam { get; set; }
         public string regels { get; set; }

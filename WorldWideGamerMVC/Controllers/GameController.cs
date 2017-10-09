@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using WorldWideGamerMVC.Models;
 using WorldWideGamerMVC.Models.HulpMethods;
+using WorldWideGamerMVC.ViewModels.Game;
 
 namespace WorldWideGamerMVC.Controllers
 {
@@ -47,9 +48,26 @@ namespace WorldWideGamerMVC.Controllers
         }
 
         [Authorize]
-        public ActionResult EditGames()
+        public ActionResult EditGame(int gameId)
         {
-            return View();
+            EditGameViewModel editGameView = new EditGameViewModel();
+            Game spel = gameBal.getGame(gameId);
+            if(spel == null)
+            {
+                return View("Index", "Home");
+            }
+            editGameView.GameId = spel.GameId;
+            editGameView.Naam = spel.Naam;
+            editGameView.Regels = spel.Regels;
+            return View(editGameView);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult SaveGame(EditGameViewModel editGameView)
+        {
+            gameBal.setSpelRegels( editGameView.GameId, editGameView.Regels);
+            return GamesOverzicht();
         }
 
 
