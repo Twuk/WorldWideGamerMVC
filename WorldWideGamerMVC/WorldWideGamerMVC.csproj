@@ -252,6 +252,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\GeschiedenisController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\GameController.cs" />
@@ -269,6 +270,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Tables\Game.cs" />
     <Compile Include="Models\Tables\GeschiedenisSpel.cs" />
+    <Compile Include="Models\Tables\ResultatenAfbeelding.cs" />
     <Compile Include="Models\Tables\Speler.cs" />
     <Compile Include="Models\Tables\Punten.cs" />
     <Compile Include="Models\Tables\UserNameSpel.cs" />
@@ -276,6 +278,7 @@
     <Compile Include="Service\wwgService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\Game\EditGameViewModel.cs" />
+    <Compile Include="ViewModels\Geschiedenis\AanvraagGesViewModel.cs" />
     <Compile Include="ViewModels\Speler\EditGamerViewModel.cs" />
     <Compile Include="ViewModels\Speler\RegisterGamerViewModel.cs" />
     <Compile Include="ViewModels\Game\GamesViewModel.cs" />
@@ -443,6 +446,7 @@
     <Content Include="Views\Game\GamesOverzicht.cshtml" />
     <Content Include="Views\Game\EditGame.cshtml" />
     <Content Include="Views\Game\DetailGame.cshtml" />
+    <Content Include="Views\Geschiedenis\AanvraagGes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

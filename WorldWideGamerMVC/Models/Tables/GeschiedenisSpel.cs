@@ -20,7 +20,7 @@ namespace WorldWideGamerMVC.Models.Tables
         public int GameId { get; set; }
         public DateTime TimeStamp { get; set; }
 
-        public int ResultatenAfbeelding { get; set; }
+        public virtual ResultatenAfbeelding Afbeelding { get; set; }
 
         public enum Status
         {
