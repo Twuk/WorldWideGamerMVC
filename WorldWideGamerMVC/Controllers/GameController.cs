@@ -37,14 +37,34 @@ namespace WorldWideGamerMVC.Controllers
             foreach(Game spel in games)
             {
                 GameViewModel gameView = fillView.FillGameViewModel(spel);
-                foreach(SpelerUserNamePerGame user in spel.Spelers){
+                foreach(UserNameSpel user in spel.Spelers){
                     SpelerUserNameGameViewModel userNameView = fillView.FillUserNameViewModel(user);
                     gameView.spelers.Add(userNameView);
                 }
                 gameModels.Add(gameView);
             }
             spelenOverzicht.Games = gameModels;
-            return View(spelenOverzicht);
+            return View("GamesOverzicht",spelenOverzicht);
+        }
+
+        public ActionResult DetailGame(int gameId)
+        {
+            Game spel;
+            if (gameId != null)
+            {
+               spel = gameBal.getGame(gameId);
+                if (spel != null)
+                {
+                    GameViewModel gameView = fillView.FillGameViewModel(spel);
+                    foreach (UserNameSpel user in spel.Spelers)
+                    {
+                        SpelerUserNameGameViewModel userNameView = fillView.FillUserNameViewModel(user);
+                        gameView.spelers.Add(userNameView);
+                    }
+                    return View("DetailGame", gameView);
+                }
+            }
+            return GamesOverzicht() ;
         }
 
         [Authorize]

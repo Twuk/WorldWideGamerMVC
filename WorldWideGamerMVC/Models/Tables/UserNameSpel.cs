@@ -7,7 +7,7 @@ using System.Web;
 
 namespace WorldWideGamerMVC.Models.Tables
 {
-    public class SpelerUserNamePerGame
+    public class UserNameSpel
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -21,12 +21,12 @@ namespace WorldWideGamerMVC.Models.Tables
         public string userName { get; set; }
 
 
-        public SpelerUserNamePerGame()
+        public UserNameSpel()
         {
 
         }
 
-        public SpelerUserNamePerGame(Game game, int gameId, string userName)
+        public UserNameSpel(Game game, int gameId, string userName)
         {
             Game = game;
             GameId = gameId;

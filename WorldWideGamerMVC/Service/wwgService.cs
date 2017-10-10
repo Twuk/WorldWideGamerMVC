@@ -63,7 +63,7 @@ namespace WorldWideGamerMVC.Service
                 //Removed eerst alles en voegt dan terug toe
                 //Heb nog te weinig kennis van EF om met niet unique foreign keys update te doen
                 var speeltGames = _ApplicationDb.SpelerGames.Where(u => u.UserId == original.UserId);
-                foreach(SpelerUserNamePerGame obj in speeltGames)
+                foreach(UserNameSpel obj in speeltGames)
                 {
                     _ApplicationDb.SpelerGames.Remove(obj);
                 }
@@ -102,19 +102,14 @@ namespace WorldWideGamerMVC.Service
         {
             
             List<Game> games = new List<Game>();
-            List<SpelerUserNamePerGame> allUserNames = new List<SpelerUserNamePerGame>();
-            List<SpelerUserNamePerGame> userNames = new List<SpelerUserNamePerGame>();
-            foreach (var userName in _ApplicationDb.SpelerGames)
-            {
-                allUserNames.Add(userName);
-            }
 
+            List<UserNameSpel> allUserNames = GetUserNames();
+            List<UserNameSpel> userNames;
             foreach (var game in _ApplicationDb.Games)
             {
-                userNames = new List<SpelerUserNamePerGame>();
+                userNames = new List<UserNameSpel>();
                 foreach (var userNameGame in allUserNames.Where(u => u.GameId == game.GameId))
                 {
-                    
                     userNames.Add(userNameGame);
                 }
                 game.Spelers = userNames;
@@ -128,6 +123,14 @@ namespace WorldWideGamerMVC.Service
         {
 
             var spel = _ApplicationDb.Games.First(g => g.GameId == gameId);
+            List<UserNameSpel> allUserNames = GetUserNames();
+            List<UserNameSpel> userNames;
+            userNames = new List<UserNameSpel>();
+            foreach (var userNameGame in allUserNames.Where(u => u.GameId == gameId))
+            {
+                userNames.Add(userNameGame);
+            }
+            spel.Spelers = userNames;
             return spel;
         }
 
@@ -147,6 +150,19 @@ namespace WorldWideGamerMVC.Service
         }
 
 
+
+        #endregion
+        public List<UserNameSpel> GetUserNames()
+        {
+            List<UserNameSpel> allUserNames = new List<UserNameSpel>();
+            foreach (var userName in _ApplicationDb.SpelerGames)
+            {
+                allUserNames.Add(userName);
+            }
+            return allUserNames;
+        }
+
+        #region userNames
 
         #endregion
     }

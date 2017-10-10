@@ -14,7 +14,8 @@ namespace WorldWideGamerMVC.Models.Tables
         public int GameId { get; set; }
         public string Naam { get; set; }
         public string Regels { get; set; }
-        public ICollection<SpelerUserNamePerGame> Spelers { get; set; }
+        public string ImageLink { get; set; }
+        public ICollection<UserNameSpel> Spelers { get; set; }
         public bool TeamSpel { get; set; }
         public ICollection<GeschiedenisSpel> geschiedenissen { get; set; }
 

@@ -174,7 +174,7 @@ namespace WorldWideGamerMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                List<SpelerUserNamePerGame> userNames = new List<SpelerUserNamePerGame>();
+                List<UserNameSpel> userNames = new List<UserNameSpel>();
                 foreach(int key in gameSelecter)
                 {
                     userNames.Add(model.userNamePerSpel.Where(l => l.GameId == key).First());

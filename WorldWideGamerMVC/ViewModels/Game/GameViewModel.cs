@@ -11,7 +11,7 @@ namespace WorldWideGamerMVC.ViewModels
         public int gameId { get; set; }
         public string naam { get; set; }
         public string regels { get; set; }
-        
+        public string ImageLink { get; set; }
         public List<SpelerUserNameGameViewModel> spelers { get; set; }
     }
 }

@@ -36,7 +36,7 @@ namespace WorldWideGamerMVC.Models
         }
 
       
-        public DbSet<SpelerUserNamePerGame> SpelerGames { get; set; }
+        public DbSet<UserNameSpel> SpelerGames { get; set; }
         public DbSet<Game> Games { get; set; }
         public DbSet<Speler> Spelers { get; set; }
         public DbSet<GeschiedenisSpel> geschiedenissen { get; set; }

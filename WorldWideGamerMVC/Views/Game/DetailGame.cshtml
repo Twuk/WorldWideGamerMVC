@@ -1,0 +1,66 @@
+﻿@model WorldWideGamerMVC.ViewModels.GameViewModel
+@using WorldWideGamerMVC.ViewModels
+
+@{
+    ViewBag.Title = "DetailGame";
+}
+
+<div class="container">
+    <div class="bg-faded p-4 my-4">
+        <hr class="divider">
+        <h2 class="text-center text-lg text-uppercase my-0">
+
+            <strong>@Html.DisplayFor(model => model.naam)</strong>
+        </h2>
+        <hr class="divider">
+        <div class="row">
+             <div class="col-lg-6">
+                 <img class="img-responsive img-thumbnail mb-4 mb-lg-0" src='@Model.ImageLink' alt="Image Game">
+            </div>
+            <div class="col-lg-6">
+                @Html.DisplayFor(model => model.regels)
+            </div>
+        </div>
+        <div class="row">
+            <table id="games" class="table table-bordered table-condensed sortable" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>UserName speler</th>
+                        <th>Naam speler</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.spelers.Count != 0)
+            {
+                foreach (SpelerUserNameGameViewModel game in Model.spelers)
+                {
+                            <tr>
+                                <th>@game.Username</th>
+                                <td>@game.SpelerViewModel.VoorNaam @game.SpelerViewModel.AchterNaam</td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <th></th>
+                            <td></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            @if (User.IsInRole("Admin"))
+            {
+                <p>
+                    @Html.ActionLink("Edit" , "EditGame", new { gameId = Model.gameId })
+                </p>
+            }
+            @Html.ActionLink("Back to Overzicht", "GamesOverzicht")
+
+        </div>
+    </div>
+</div>
+  

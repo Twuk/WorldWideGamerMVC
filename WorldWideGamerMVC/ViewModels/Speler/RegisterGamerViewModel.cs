@@ -40,6 +40,6 @@ namespace WorldWideGamerMVC.ViewModels.Gamer
 
         [Required]
         [Display(Name = "UserName")]
-        public List<SpelerUserNamePerGame> userNamePerSpel { get; set; }
+        public List<UserNameSpel> userNamePerSpel { get; set; }
     }
 }

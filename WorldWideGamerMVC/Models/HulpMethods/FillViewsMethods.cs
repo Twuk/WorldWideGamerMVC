@@ -26,6 +26,7 @@ namespace WorldWideGamerMVC.Models.HulpMethods
             gameViewModel.gameId = game.GameId;
             gameViewModel.naam = game.Naam;
             gameViewModel.regels = game.Regels;
+            gameViewModel.ImageLink = game.ImageLink;
             gameViewModel.spelers = new List<SpelerUserNameGameViewModel>();
             return gameViewModel;
         }
@@ -39,7 +40,7 @@ namespace WorldWideGamerMVC.Models.HulpMethods
             return spelerViewModel;
         }
 
-        public SpelerUserNameGameViewModel FillUserNameViewModel(SpelerUserNamePerGame username)
+        public SpelerUserNameGameViewModel FillUserNameViewModel(UserNameSpel username)
         {
             SpelerUserNameGameViewModel userNameViewModel = new SpelerUserNameGameViewModel();
             if (username.speler != null && username.Game != null)

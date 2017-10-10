@@ -9,73 +9,65 @@
 <hr />
 <div>
     <div class="table-responsive">
-        <table id="example" class="table table-striped table-bordered table-condensed sortable">
+        <table id="example" class="table table-bordered table-condensed">
             <thead>
                 <tr>
-                    <th></th>
-                    <th>Naam</th>
-                    <th>Regels</th>
-                    <th>Spelers</th>
+                    <th>Games</th>
+@foreach (GameViewModel item in Model.Games)
+{
+    <th>@Html.ActionLink(item.naam, "DetailGame", "Game", new { gameId = item.gameId }, null)</th>
+}
+                   
                 </tr>
             </thead>
             <tbody>
-                @foreach (GameViewModel item in Model.Games)
-                {
+
+<tr>
+    <td>Stats</td>
+    @foreach (GameViewModel item in Model.Games)
+    {
+        <td>
+            <table id="games" class="table table-bordered" cellspacing="0">
+                <thead>
                     <tr>
+                        <th>UserName speler</th>
+                        <th>Naam speler</th>
 
-                        <td>
-                            @if (User.IsInRole("Admin"))
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (item.spelers.Count != 0)
+                    {
+                        foreach (SpelerUserNameGameViewModel game in item.spelers)
                         {
-                            @item.gameId<br />
-                            <a href="@Url.Action("editGame","Game",new { gameId = @item.gameId })">
-                                <span class="glyphicon glyphicon-wrench"></span>
-                            </a><br />
-                            <a href="@Url.Action("deleteGame","Game",new { gameId = @item.gameId })" onclick="return confirm('Are you sure you want to Delete?')">
-                                <span class="glyphicon glyphicon-remove"></span>
-                            </a>
+                            <tr>
+                                <th>@game.Username</th>
+                                <td>@game.SpelerViewModel.VoorNaam @game.SpelerViewModel.AchterNaam</td>
+                            </tr>
                         }
-                    </td>
-                    <th>@item.naam</th>
-                    <td>@item.regels</td>
-                    <td>
-                        <table id="games" class="table table-striped table-bordered" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th>UserName speler</th>
-                                    <th>Naam speler</th>
-
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if (item.spelers.Count != 0 )
-                                {
-                                    foreach (SpelerUserNameGameViewModel game in item.spelers)
-                                    {
-                                    <tr>
-                                        <th>@game.Username</th>
-                                        <td>@game.SpelerViewModel.VoorNaam @game.SpelerViewModel.AchterNaam</td>
-                                    </tr>
-                                    }
-                                }
-                                else
-                                {
-                                    <tr>
-                                        <th></th>
-                                        <td></td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                    </td>
+                    }
+                    else
+                    {
+                        <tr>
+                            <th></th>
+                            <td></td>
+                            </tr>
+                        
+                    }
+                </tbody>
+            </table>
+        </td>
+               
+    }
                 </tr>
-                }
             </tbody>
             <tfoot>
                 <tr>
-                    <th></th>
-                    <th>Naam</th>
-                    <th>Regels</th>
-                    <th>Spelers</th>
+                    <th>Games</th>
+                    @foreach (GameViewModel item in Model.Games)
+                    {
+                        <th>@Html.ActionLink(item.naam, "DetailGame", "Game", new { gameId = item.gameId }, null)</th>
+                    }
                 </tr>
             </tfoot>
             <tbody>
