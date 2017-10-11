@@ -89,8 +89,8 @@ namespace WorldWideGamerMVC.Controllers
                 }
                 else
                 {
-                    //Error Return
-                    return View();
+                    string errorMessage = "Er zijn niet zoveel spelers geregistreerd voor " + spel.Naam; 
+                    return View("Error",new ErrorViewModel(errorMessage));
                 }
             }
             return View();
@@ -98,7 +98,7 @@ namespace WorldWideGamerMVC.Controllers
 
         public bool GenoegGeregistreerdeSpelers(int aantalSpelers, Game spel)
         {
-            if(spel.Spelers.Count <= aantalSpelers)
+            if(spel.Spelers.Count >= aantalSpelers)
             {
                 return true;
             }
