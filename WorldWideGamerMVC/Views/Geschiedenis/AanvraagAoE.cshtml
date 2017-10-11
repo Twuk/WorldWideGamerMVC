@@ -1,0 +1,70 @@
+﻿@using WorldWideGamerMVC.ViewModels
+@model WorldWideGamerMVC.ViewModels.Geschiedenis.AanvraagAoEViewModel
+@{
+    ViewBag.Title = "AanvraagAoE";
+}
+
+<h2>AanvraagAoE</h2>
+
+@using (Html.BeginForm("Aanvraag", "Geschiedenis", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div>@Html.Label("Team 1")</div>
+   
+    for (int i = 0; i < Model.AantalSpelers / 2; i++)
+    {
+
+        <div class="form-group">
+            @Html.Label("Team 1", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.UserId, Model.meeGespeeldeSpelers, new { @class = "selectpicker", @id = "spelerSelect" })
+            </div>
+        </div>
+    }
+
+    <div>@Html.Label("Team 2")</div>
+
+    for (int i = 0; i < Model.AantalSpelers / 2; i++)
+    {
+
+        <div class="form-group">
+            @Html.Label("Team 2", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.UserId, Model.meeGespeeldeSpelers, new { @class = "selectpicker", @id = "spelerSelect" })
+            </div>
+        </div>
+    }
+    <div class="form-group">
+        <div class="col-md-6">
+            <input type="submit" class="btn btn-default" value="Keer terug" />
+        </div>
+        <div class="col-md-6">
+            <input type="submit" class="btn btn-default" value="Ga verder" />
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <script type="text/javascript">
+
+        window.onload = function () {
+            setAantalSpelers();
+        };
+        $('#spelSelect').on('changed.bs.select', function (e) {
+            setAantalSpelers();
+
+        });
+        function setAantalSpelers() {
+            var gameId = $('#spelSelect').val();
+            $.get('@Url.Action("isTeamSpel", "Geschiedenis")?gameId=' + gameId, function (data) {
+                if (data == "True") {
+                    $("#aantalSpelersSelect").prop("disabled", false);
+                }
+                else {
+                    $("#aantalSpelersSelect").prop("disabled", true);
+                }
+                });
+
+        };
+
+    </script>
+}

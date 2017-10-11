@@ -18,6 +18,7 @@ namespace WorldWideGamerMVC.Models.Tables
 
         public virtual ICollection<UserNameSpel> SpeeltGames { get; set; }
 
+        public virtual ICollection<GeschiedenisDetails> heeftGeschiedenisMet { get; set; }
         
 
         // other fields...

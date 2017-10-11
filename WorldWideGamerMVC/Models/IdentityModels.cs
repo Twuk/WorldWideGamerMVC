@@ -35,10 +35,11 @@ namespace WorldWideGamerMVC.Models
             return new ApplicationDbContext();
         }
 
-      
+
+        public DbSet<GeschiedenisDetails> GeschiedenisSpelers { get; set; }
         public DbSet<UserNameSpel> SpelerGames { get; set; }
         public DbSet<Game> Games { get; set; }
         public DbSet<Speler> Spelers { get; set; }
-        public DbSet<GeschiedenisSpel> geschiedenissen { get; set; }
+        public DbSet<Geschiedenis> Geschiedenissen { get; set; }
     }
 }

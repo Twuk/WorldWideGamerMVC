@@ -1,0 +1,63 @@
+﻿@using WorldWideGamerMVC.ViewModels
+@model WorldWideGamerMVC.ViewModels.Geschiedenis.AanvraagSpelSpelersViewModel
+@{
+    ViewBag.Title = "AanvraagGes";
+}
+
+<h2>AanvraagGes</h2>
+
+@using (Html.BeginForm("Aanvraag", "Geschiedenis", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.Hidden("UserId", Model.UserId)
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.AlleGames, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.GameId, Model.AlleGames.Select(i => new SelectListItem { Text = i.naam, Value = i.gameId.ToString() }), new { @class = "selectpicker", @id= "spelSelect" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.AantalSpelers, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.AantalSpelers, Enumerable.Range(2, 9).Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }), new { @class = "selectpicker",@id="aantalSpelersSelect" })
+        </div>
+    </div>
+
+        <div class="form-group">
+            @Html.TextBoxFor(m => m.Image, new { type = "file"})
+            <div class="col-md-10">
+                @Html.ValidationMessageFor(m => m.Image)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-default" value="Ga verder" />
+            </div>
+        </div>
+        }
+        @section Scripts {
+            <script type="text/javascript">
+
+        window.onload = function () {
+            setAantalSpelers();
+        };
+        $('#spelSelect').on('changed.bs.select', function (e) {
+            setAantalSpelers();
+
+        });
+        function setAantalSpelers() {
+            var gameId = $('#spelSelect').val();
+            $.get('@Url.Action("isTeamSpel", "Geschiedenis")?gameId=' + gameId, function (data) {
+                if (data == "True") {
+                    $("#aantalSpelersSelect").prop("disabled", false);
+                }
+                else {
+                    $("#aantalSpelersSelect").prop("disabled", true);
+                }
+                });
+
+        };
+
+            </script>
+        }

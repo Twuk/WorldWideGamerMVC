@@ -152,6 +152,9 @@ namespace WorldWideGamerMVC.Service
 
 
         #endregion
+
+        #region userNames
+
         public List<UserNameSpel> GetUserNames()
         {
             List<UserNameSpel> allUserNames = new List<UserNameSpel>();
@@ -161,9 +164,6 @@ namespace WorldWideGamerMVC.Service
             }
             return allUserNames;
         }
-
-        #region userNames
-
         #endregion
     }
 }

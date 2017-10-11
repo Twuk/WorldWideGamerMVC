@@ -17,7 +17,7 @@ namespace WorldWideGamerMVC.Models.Tables
         public string ImageLink { get; set; }
         public ICollection<UserNameSpel> Spelers { get; set; }
         public bool TeamSpel { get; set; }
-        public ICollection<GeschiedenisSpel> geschiedenissen { get; set; }
+        public ICollection<GeschiedenisDetails> geschiedenissen { get; set; }
 
     }
 }

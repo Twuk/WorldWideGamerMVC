@@ -7,18 +7,18 @@ using System.Web;
 
 namespace WorldWideGamerMVC.Models.Tables
 {
-    public class GeschiedenisSpel
+    public class Geschiedenis
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int GeschiedenisId { get; set; }
         public int GewonnenSpeler { get; set; }
         public int GewonnenTeam { get; set; }
-
-        [Key, ForeignKey("GameId")]
-        public Game Game { get; set; }
-        public int GameId { get; set; }
+        
         public DateTime TimeStamp { get; set; }
+
+        // Lijst met spelers, type spel, punten, teams
+        public ICollection<GeschiedenisDetails> Details { get; set; }
 
         public virtual ResultatenAfbeelding Afbeelding { get; set; }
 

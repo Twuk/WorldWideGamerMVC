@@ -14,6 +14,6 @@ namespace WorldWideGamerMVC.Models.Tables
         public int ResultatenAfbeeldingId { get; set; }
         public string AfbeeldingLink { get; set; }
 
-        public virtual GeschiedenisSpel Geschiedenis { get; set; }
+        public virtual Geschiedenis Geschiedenis { get; set; }
     }
 }

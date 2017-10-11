@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using WorldWideGamerMVC.Models;
 using WorldWideGamerMVC.Models.BusinessLayer;
 using WorldWideGamerMVC.Models.HulpMethods;
+using WorldWideGamerMVC.Models.Tables;
 using WorldWideGamerMVC.ViewModels;
 using WorldWideGamerMVC.ViewModels.Geschiedenis;
 
@@ -31,7 +32,7 @@ namespace WorldWideGamerMVC.Controllers
         public ActionResult Aanvraag()
         {
             string userId = User.Identity.GetUserId();
-            AanvraagGesViewModel aanvraag = new AanvraagGesViewModel();
+            AanvraagSpelSpelersViewModel aanvraag = new AanvraagSpelSpelersViewModel();
             List<GameViewModel> gameViewModels = new List<GameViewModel>();
             foreach(var spel in gameBal.getGames())
             {
@@ -39,31 +40,69 @@ namespace WorldWideGamerMVC.Controllers
             }
             aanvraag.AlleGames = gameViewModels;
             aanvraag.UserId = userId;
-            return View("AanvraagGes",aanvraag);
+            return View("AanvraagSpelSpelers",aanvraag);
+        }
+        public bool isTeamSpel(int gameId)
+        {
+            bool isTeam = gameBal.getGame(gameId).TeamSpel;
+            return isTeam;
         }
 
         [HttpPost]
-        public ActionResult Aanvraag(AanvraagGesViewModel model, int gameSelecter)
+        public ActionResult Aanvraag(AanvraagSpelSpelersViewModel model)
         {
             if (ModelState.IsValid)
             {
                 string userId = User.Identity.GetUserId();
-                AanvraagGesViewModel aanvraag = new AanvraagGesViewModel();
-                aanvraag.UserId = userId;
-                if (model.Image != null && model.Image.ContentLength > 0)
+                AanvraagAoEViewModel volgendeAanvraag = new AanvraagAoEViewModel();
+                volgendeAanvraag.AantalSpelers = model.AantalSpelers;
+                volgendeAanvraag.GameId = model.GameId;
+                Game spel = new Game();
+                spel = gameBal.getGame(model.GameId);
+                if (GenoegGeregistreerdeSpelers(model.AantalSpelers, spel))
                 {
-                    string displayName = model.Image.FileName;
-                    string fileExtension = Path.GetExtension(displayName);
-                    var date = DateTime.Now;
-                    string tijdConvertie = date.ToString("yy/MM/dd H:mm:ss");
-                    string fileName = string.Format("{0}{1}", Guid.NewGuid(), fileExtension);
-                    string path = Path.Combine(Server.MapPath("~/Images/"), fileName);
-                    model.Image.SaveAs(path);
-                    // Update data model
+                    List<Speler> spelers = gamerBal.GetGamers();
+                    List<SelectListItem> items = new List<SelectListItem>();
+                    foreach (var speler in spelers)
+                    {
+                        if (spel.Spelers.Any(u => u.UserId == speler.UserId))
+                        {
+                            UserNameSpel userNameSpel = spel.Spelers.Where(u => u.UserId == speler.UserId).First();
+                            items.Add(new SelectListItem { Text = userNameSpel.userName, Value = userNameSpel.UserId });
+                        }
+
+                    }
+                    volgendeAanvraag.meeGespeeldeSpelers = items;
+                    if (model.Image != null && model.Image.ContentLength > 0)
+                    {
+                        string displayName = model.Image.FileName;
+                        string fileExtension = Path.GetExtension(displayName);
+                        var date = DateTime.Now;
+                        string tijdConvertie = date.ToString("yyMMddHmmss");
+                        string fileName = string.Format("{0}{1}", tijdConvertie, fileExtension);
+                        string uploadPath = "~/Images/Geschiedenis/" + spel.Naam + "/";
+                        string path = Path.Combine(Server.MapPath(uploadPath), fileName);
+                        model.Image.SaveAs(path);
+                        volgendeAanvraag.Image = model.Image;
+                    }
+                    return View("AanvraagAoE", volgendeAanvraag);
+                }
+                else
+                {
+                    //Error Return
+                    return View();
                 }
             }
             return View();
         }
 
+        public bool GenoegGeregistreerdeSpelers(int aantalSpelers, Game spel)
+        {
+            if(spel.Spelers.Count <= aantalSpelers)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }
