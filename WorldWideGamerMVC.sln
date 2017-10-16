@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorldWideGamerMVC", "WorldWideGamerMVC\WorldWideGamerMVC.csproj", "{5F2397BD-FFAE-4E84-BE3A-152F69901700}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FillDatabaseTest", "FillDatabaseTest\FillDatabaseTest.csproj", "{F0EFE408-66DF-4999-9871-F7DED8A0F395}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{5F2397BD-FFAE-4E84-BE3A-152F69901700}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F2397BD-FFAE-4E84-BE3A-152F69901700}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F2397BD-FFAE-4E84-BE3A-152F69901700}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0EFE408-66DF-4999-9871-F7DED8A0F395}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0EFE408-66DF-4999-9871-F7DED8A0F395}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0EFE408-66DF-4999-9871-F7DED8A0F395}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0EFE408-66DF-4999-9871-F7DED8A0F395}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

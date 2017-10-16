@@ -18,7 +18,7 @@ namespace WorldWideGamerMVC.Models.Tables
         [Key, ForeignKey("GameId")]
         public Game Game { get; set; }
         public int GameId { get; set; }
-        public string userName { get; set; }
+        public string UserName { get; set; }
 
 
         public UserNameSpel()
@@ -26,11 +26,17 @@ namespace WorldWideGamerMVC.Models.Tables
 
         }
 
+        public UserNameSpel(int gameId, string userName)
+        {
+            GameId = gameId;
+            UserName = userName;
+        }
+
         public UserNameSpel(Game game, int gameId, string userName)
         {
             Game = game;
             GameId = gameId;
-            this.userName = userName;
+            UserName = userName;
         }
     }
     

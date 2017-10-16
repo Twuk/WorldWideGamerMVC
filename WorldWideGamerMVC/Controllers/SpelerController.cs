@@ -45,7 +45,7 @@ namespace WorldWideGamerMVC.Controllers
                 {
                     SpelerUserNameGameViewModel spelerUserNameGame = new SpelerUserNameGameViewModel();
                     spelerUserNameGame.GameViewModel = fillView.FillGameViewModel(gameBal.getGame(obj.GameId));
-                    spelerUserNameGame.Username = obj.userName;
+                    spelerUserNameGame.Username = obj.UserName;
                     userNamesGameViewModels.Add(spelerUserNameGame);
                 }
                 gamerViewModel.GespeeldeGames = userNamesGameViewModels;
@@ -81,7 +81,7 @@ namespace WorldWideGamerMVC.Controllers
                         speeltGamesDict.Add(gameView, false);
                         obj = new UserNameSpel();
                         obj.GameId = spel.GameId;
-                        obj.userName = "";
+                        obj.UserName = "";
                     }
                     else
                     {

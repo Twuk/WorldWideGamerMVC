@@ -46,23 +46,23 @@ namespace WorldWideGamerMVC.Models.HulpMethods
             if (username.speler != null && username.Game != null)
             {
                 userNameViewModel.GameViewModel = FillGameViewModel(gameBalCon.getGame(username.GameId));
-                userNameViewModel.Username = username.userName;
+                userNameViewModel.Username = username.UserName;
                 userNameViewModel.SpelerViewModel = FillSpelerViewModel(gamerBalCon.GetGamer(username.UserId));
             }
             else if (username.speler != null && username.Game == null)
             {
                 userNameViewModel.GameViewModel = FillGameViewModel(gameBalCon.getGame(username.GameId));
-                userNameViewModel.Username = username.userName;
+                userNameViewModel.Username = username.UserName;
             }
             else if (username.Game != null && username.speler == null)
             {
 
                 userNameViewModel.SpelerViewModel = FillSpelerViewModel(gamerBalCon.GetGamer(username.UserId));
-                userNameViewModel.Username = username.userName;
+                userNameViewModel.Username = username.UserName;
             }
             else
             {
-                userNameViewModel.Username = username.userName;
+                userNameViewModel.Username = username.UserName;
             }
             return userNameViewModel;
         }

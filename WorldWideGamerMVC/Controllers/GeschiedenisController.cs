@@ -68,7 +68,7 @@ namespace WorldWideGamerMVC.Controllers
                         if (spel.Spelers.Any(u => u.UserId == speler.UserId))
                         {
                             UserNameSpel userNameSpel = spel.Spelers.Where(u => u.UserId == speler.UserId).First();
-                            items.Add(new SelectListItem { Text = userNameSpel.userName, Value = userNameSpel.UserId });
+                            items.Add(new SelectListItem { Text = userNameSpel.UserName, Value = userNameSpel.UserId });
                         }
 
                     }
