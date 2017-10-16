@@ -23,7 +23,7 @@ namespace WorldWideGamerMVC.ViewModels
         public List<GameViewModel> games { get; set; }
         
         [Display(Name = "UserName")]
-        public List<SpelerUserNamePerGame> userNamePerSpel { get; set; }
+        public List<UserNameSpel> userNamePerSpel { get; set; }
         
     }
 }

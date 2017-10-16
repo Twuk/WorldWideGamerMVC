@@ -30,5 +30,10 @@ namespace WorldWideGamerMVC.Models.BusinessLayer
         {
             return databaseConnectionClass.GetGames(); ;
         }
+
+        public void setSpelRegels(int gameId, string regels)
+        {
+            databaseConnectionClass.SetSpelRegels(gameId, regels);
+        }
     }
 }

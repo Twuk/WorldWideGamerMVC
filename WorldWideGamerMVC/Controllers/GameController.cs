@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using WorldWideGamerMVC.Models;
 using WorldWideGamerMVC.Models.HulpMethods;
+using WorldWideGamerMVC.ViewModels.Game;
 
 namespace WorldWideGamerMVC.Controllers
 {
@@ -36,20 +37,57 @@ namespace WorldWideGamerMVC.Controllers
             foreach(Game spel in games)
             {
                 GameViewModel gameView = fillView.FillGameViewModel(spel);
-                foreach(SpelerUserNamePerGame user in spel.Spelers){
+                foreach(UserNameSpel user in spel.Spelers){
                     SpelerUserNameGameViewModel userNameView = fillView.FillUserNameViewModel(user);
                     gameView.spelers.Add(userNameView);
                 }
                 gameModels.Add(gameView);
             }
             spelenOverzicht.Games = gameModels;
-            return View(spelenOverzicht);
+            return View("GamesOverzicht",spelenOverzicht);
+        }
+
+        public ActionResult DetailGame(int gameId)
+        {
+            Game spel;
+            if (gameId != null)
+            {
+               spel = gameBal.getGame(gameId);
+                if (spel != null)
+                {
+                    GameViewModel gameView = fillView.FillGameViewModel(spel);
+                    foreach (UserNameSpel user in spel.Spelers)
+                    {
+                        SpelerUserNameGameViewModel userNameView = fillView.FillUserNameViewModel(user);
+                        gameView.spelers.Add(userNameView);
+                    }
+                    return View("DetailGame", gameView);
+                }
+            }
+            return GamesOverzicht() ;
         }
 
         [Authorize]
-        public ActionResult EditGames()
+        public ActionResult EditGame(int gameId)
         {
-            return View();
+            EditGameViewModel editGameView = new EditGameViewModel();
+            Game spel = gameBal.getGame(gameId);
+            if(spel == null)
+            {
+                return View("Index", "Home");
+            }
+            editGameView.GameId = spel.GameId;
+            editGameView.Naam = spel.Naam;
+            editGameView.Regels = spel.Regels;
+            return View(editGameView);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult SaveGame(EditGameViewModel editGameView)
+        {
+            gameBal.setSpelRegels( editGameView.GameId, editGameView.Regels);
+            return GamesOverzicht();
         }
 
 

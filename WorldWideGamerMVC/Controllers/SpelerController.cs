@@ -38,13 +38,14 @@ namespace WorldWideGamerMVC.Controllers
             {
                 SpelerViewModel gamerViewModel = new SpelerViewModel();
                 List<SpelerUserNameGameViewModel> userNamesGameViewModels = new List<SpelerUserNameGameViewModel>();
+                gamerViewModel.UserId = speler.UserId;
                 gamerViewModel.VoorNaam = speler.FirstName;
                 gamerViewModel.AchterNaam = speler.LastName;
-                foreach (SpelerUserNamePerGame obj in speler.SpeeltGames)
+                foreach (UserNameSpel obj in speler.SpeeltGames)
                 {
                     SpelerUserNameGameViewModel spelerUserNameGame = new SpelerUserNameGameViewModel();
                     spelerUserNameGame.GameViewModel = fillView.FillGameViewModel(gameBal.getGame(obj.GameId));
-                    spelerUserNameGame.Username = obj.userName;
+                    spelerUserNameGame.Username = obj.UserName;
                     userNamesGameViewModels.Add(spelerUserNameGame);
                 }
                 gamerViewModel.GespeeldeGames = userNamesGameViewModels;
@@ -69,18 +70,18 @@ namespace WorldWideGamerMVC.Controllers
                 edit.UserId = speler.UserId;
                 edit.FirstName = speler.FirstName;
                 edit.LastName = speler.LastName;
-                List<SpelerUserNamePerGame> list = new List<SpelerUserNamePerGame>();
+                List<UserNameSpel> list = new List<UserNameSpel>();
                 foreach (Game spel in gameBal.getGames())
                 {
                     GameViewModel gameView = fillView.FillGameViewModel(spel);
-                    SpelerUserNamePerGame obj;
+                    UserNameSpel obj;
                     games.Add(gameView);
                     if (!speler.SpeeltGames.Any(u => u.GameId == spel.GameId))
                     {
                         speeltGamesDict.Add(gameView, false);
-                        obj = new SpelerUserNamePerGame();
+                        obj = new UserNameSpel();
                         obj.GameId = spel.GameId;
-                        obj.userName = "";
+                        obj.UserName = "";
                     }
                     else
                     {
@@ -119,7 +120,7 @@ namespace WorldWideGamerMVC.Controllers
                 var userManager = new UserManager<ApplicationUser>(store);
                 ApplicationUser user = userManager.FindById(e.UserId);
                 gamer.User = user;
-                List<SpelerUserNamePerGame> userNames = new List<SpelerUserNamePerGame>();
+                List<UserNameSpel> userNames = new List<UserNameSpel>();
                 foreach (int key in gameSelecter)
                 {
                     userNames.Add(e.userNamePerSpel.Where(l => l.GameId == key).First());

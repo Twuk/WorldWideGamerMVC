@@ -37,9 +37,8 @@ namespace WorldWideGamerMVC.ViewModels.Gamer
         public string ConfirmPassword { get; set; }
 
         public List<GameViewModel> games { get; set; }
-
-        [Required]
+        
         [Display(Name = "UserName")]
-        public List<SpelerUserNamePerGame> userNamePerSpel { get; set; }
+        public List<UserNameSpel> userNamePerSpel { get; set; }
     }
 }

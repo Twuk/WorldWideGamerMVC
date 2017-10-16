@@ -1,9 +1,18 @@
-﻿@model System.Web.Mvc.HandleErrorInfo
+﻿@using WorldWideGamerMVC.ViewModels
+@model WorldWideGamerMVC.ViewModels.ErrorViewModel
 
 @{
     ViewBag.Title = "Error";
 }
 
 <h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
+<h2 class="text-danger">@Model.Tekst</h2>
+<div class="form-group">
+    <div class="col-md-6">
+        <button type="button"  onclick="location.href='@Url.Action("GamersOverzicht", "Speler")'" class="btn btn-primary">Keer terug</button>
+    </div>
+    <div class="col-md-6">
+        <button type="button" onclick="location.href='@Url.Action("GamersOverzicht", "Speler")'" class="btn btn-success" >Zend fout door </button>
+    </div>
+</div>
 
