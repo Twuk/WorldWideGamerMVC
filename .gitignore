@@ -3,3 +3,7 @@
 *.config
 .vs/config/applicationhost.config
 .vs/config/applicationhost.config
+*.dll
+*.dll
+*.cache
+WorldWideGamerMVC/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
