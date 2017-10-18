@@ -53,47 +53,107 @@ namespace WorldWideGamerMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                string userId = User.Identity.GetUserId();
-                AanvraagAoEViewModel volgendeAanvraag = new AanvraagAoEViewModel();
-                volgendeAanvraag.AantalSpelers = model.AantalSpelers;
-                volgendeAanvraag.GameId = model.GameId;
-                Game spel = new Game();
-                spel = gameBal.getGame(model.GameId);
-                if (GenoegGeregistreerdeSpelers(model.AantalSpelers, spel))
+                switch (model.GameId)
                 {
-                    List<Speler> spelers = gamerBal.GetGamers();
-                    List<SelectListItem> items = new List<SelectListItem>();
-                    foreach (var speler in spelers)
-                    {
-                        if (spel.Spelers.Any(u => u.UserId == speler.UserId))
-                        {
-                            UserNameSpel userNameSpel = spel.Spelers.Where(u => u.UserId == speler.UserId).First();
-                            items.Add(new SelectListItem { Text = userNameSpel.UserName, Value = userNameSpel.UserId });
-                        }
-
-                    }
-                    volgendeAanvraag.meeGespeeldeSpelers = items;
-                    if (model.Image != null && model.Image.ContentLength > 0)
-                    {
-                        string displayName = model.Image.FileName;
-                        string fileExtension = Path.GetExtension(displayName);
-                        var date = DateTime.Now;
-                        string tijdConvertie = date.ToString("yyMMddHmmss");
-                        string fileName = string.Format("{0}{1}", tijdConvertie, fileExtension);
-                        string uploadPath = "~/Images/Geschiedenis/" + spel.Naam + "/";
-                        string path = Path.Combine(Server.MapPath(uploadPath), fileName);
-                        model.Image.SaveAs(path);
-                        volgendeAanvraag.Image = model.Image;
-                    }
-                    return View("AanvraagAoE", volgendeAanvraag);
-                }
-                else
-                {
-                    string errorMessage = "Er zijn niet zoveel spelers geregistreerd voor " + spel.Naam; 
-                    return View("Error",new ErrorViewModel(errorMessage));
+                    case 1:
+                        return AanvraagAoe(model);
+                    case 2:
+                        return AanvraagHS(model);
+                    case 3:
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        break;
+                    default:
+                        break;
                 }
             }
+            ModelState.AddModelError("",new Exception("Je hebt een foutje gemaakt"));
             return View();
+        }
+
+        public ActionResult AanvraagAoe(AanvraagSpelSpelersViewModel model)
+        {
+            AanvraagAoEViewModel volgendeAanvraag = new AanvraagAoEViewModel();
+            volgendeAanvraag.AantalSpelers = model.AantalSpelers;
+            volgendeAanvraag.GameId = model.GameId;
+            Game spel = new Game();
+            spel = gameBal.getGame(model.GameId);
+            if (GenoegGeregistreerdeSpelers(model.AantalSpelers, spel))
+            {
+                List<Speler> spelers = gamerBal.GetGamers();
+                List<SelectListItem> items = new List<SelectListItem>();
+                foreach (var speler in spelers)
+                {
+                    if (spel.Spelers.Any(u => u.UserId == speler.UserId))
+                    {
+                        UserNameSpel userNameSpel = spel.Spelers.Where(u => u.UserId == speler.UserId).First();
+                        items.Add(new SelectListItem { Text = userNameSpel.UserName, Value = userNameSpel.UserId });
+                    }
+
+                }
+                volgendeAanvraag.meeGespeeldeSpelers = items;
+                if (model.Image != null && model.Image.ContentLength > 0)
+                {
+                    saveImage(model.Image, spel.Naam);
+                    volgendeAanvraag.Image = model.Image;
+                }
+
+            }
+            else
+            {
+                string errorMessage = "Er zijn niet zoveel spelers geregistreerd voor " + spel.Naam;
+                return View("Error", new ErrorViewModel(errorMessage));
+            }
+            return View("AanvraagAoE", volgendeAanvraag);
+        }
+
+        public ActionResult AanvraagHS(AanvraagSpelSpelersViewModel model)
+        {
+            AanvraagHSViewModel volgendeAanvraag = new AanvraagHSViewModel();
+            volgendeAanvraag.GameId = model.GameId;
+            Game spel = new Game();
+            spel = gameBal.getGame(model.GameId);
+            if (GenoegGeregistreerdeSpelers(model.AantalSpelers, spel))
+            {
+                List<Speler> spelers = gamerBal.GetGamers();
+                List<SelectListItem> items = new List<SelectListItem>();
+                foreach (var speler in spelers)
+                {
+                    if (spel.Spelers.Any(u => u.UserId == speler.UserId))
+                    {
+                        UserNameSpel userNameSpel = spel.Spelers.Where(u => u.UserId == speler.UserId).First();
+                        items.Add(new SelectListItem { Text = userNameSpel.UserName, Value = userNameSpel.UserId });
+                    }
+
+                }
+                volgendeAanvraag.Tegenstander = items;
+                if (model.Image != null && model.Image.ContentLength > 0)
+                {
+                    saveImage(model.Image, spel.Naam);
+                    volgendeAanvraag.Image = model.Image;
+                }
+
+            }
+            else
+            {
+                string errorMessage = "Er zijn niet zoveel spelers geregistreerd voor " + spel.Naam;
+                return View("Error", new ErrorViewModel(errorMessage));
+            }
+            return View("AanvraagAoE", volgendeAanvraag);
+        }
+
+        public void saveImage (HttpPostedFileBase image, string spelnaam)
+        {
+            string displayName = image.FileName;
+            string fileExtension = Path.GetExtension(displayName);
+            var date = DateTime.Now;
+            string tijdConvertie = date.ToString("yyMMddHmmss");
+            string fileName = string.Format("{0}{1}", tijdConvertie, fileExtension);
+            string uploadPath = "~/Images/Geschiedenis/" + spelnaam + "/";
+            string path = Path.Combine(Server.MapPath(uploadPath), fileName);
+            image.SaveAs(path);
         }
 
         public bool GenoegGeregistreerdeSpelers(int aantalSpelers, Game spel)

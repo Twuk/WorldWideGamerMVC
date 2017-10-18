@@ -1,9 +1,18 @@
 
 .vs/WorldWideGamerMVC/v15/sqlite3/storage.ide
+*.ide
+.vs/WorldWideGamerMVC/v15/.suo
 *.config
 .vs/config/applicationhost.config
+<<<<<<< HEAD
 .vs/config/applicationhost.config
 *.dll
 *.dll
 *.cache
 WorldWideGamerMVC/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+=======
+*.cache
+*.pdb
+*.dll
+>>>>>>> afc6e1277fe2e2f96f7516bb580a20f4fe519d7d
+.vs/WorldWideGamerMVC/v15/sqlite3/storage.ide

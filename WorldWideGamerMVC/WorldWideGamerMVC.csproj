@@ -281,6 +281,7 @@
     <Compile Include="ViewModels\ErrorViewModel.cs" />
     <Compile Include="ViewModels\Game\EditGameViewModel.cs" />
     <Compile Include="ViewModels\Geschiedenis\AanvraagAoEViewModel.cs" />
+    <Compile Include="ViewModels\Geschiedenis\AanvraagHSViewModel.cs" />
     <Compile Include="ViewModels\Geschiedenis\AanvraagSpelSpelersViewModel.cs" />
     <Compile Include="ViewModels\Speler\EditGamerViewModel.cs" />
     <Compile Include="ViewModels\Speler\RegisterGamerViewModel.cs" />
@@ -451,6 +452,8 @@
     <Content Include="Views\Game\DetailGame.cshtml" />
     <Content Include="Views\Geschiedenis\AanvraagSpelSpelers.cshtml" />
     <Content Include="Views\Geschiedenis\AanvraagAoE.cshtml" />
+    <Content Include="Views\Home\Beheer.cshtml" />
+    <Content Include="Views\Geschiedenis\AanvraagHS.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

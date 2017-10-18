@@ -31,7 +31,7 @@ namespace WorldWideGamerMVC
                 var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
                 role.Name = "Admin";
                 roleManager.Create(role);
-
+                
                 //Here we create a Admin super user who will maintain the website                  
                 /*
                 var user = new ApplicationUser();
