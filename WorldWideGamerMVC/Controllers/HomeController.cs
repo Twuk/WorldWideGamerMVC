@@ -10,6 +10,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using WorldWideGamerMVC.Models;
 using WorldWideGamerMVC.Models.HulpMethods;
+using System.Web.Security;
+using System.Security.Claims;
 
 namespace WorldWideGamerMVC.Controllers
 {
@@ -19,6 +21,7 @@ namespace WorldWideGamerMVC.Controllers
         private GameBusinessLayer gameBal;
         private GamerBusinessLayer gamerBal;
         private FillViewsMethods fillView;
+        private Random rnd = new Random();
 
         public HomeController()
         {
@@ -36,7 +39,10 @@ namespace WorldWideGamerMVC.Controllers
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
-
+            var store = new UserStore<ApplicationUser>(databaseConnectie);
+            var manager = new UserManager<ApplicationUser>(store);
+            var user = databaseConnectie.Users.Where(u => u.Email == "tdorchain@gmail.com").First();
+            manager.AddToRole(user.Id, "Admin");
             return View();
         }
 
@@ -46,7 +52,12 @@ namespace WorldWideGamerMVC.Controllers
 
             return View();
         }
-      
-      
+
+        public ActionResult Beheer()
+        {
+            return View();
+        }
+
+
     }
 }

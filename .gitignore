@@ -4,3 +4,6 @@
 .vs/WorldWideGamerMVC/v15/.suo
 *.config
 .vs/config/applicationhost.config
+*.cache
+*.pdb
+*.dll
