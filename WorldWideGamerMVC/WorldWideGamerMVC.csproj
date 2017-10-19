@@ -273,7 +273,7 @@
     <Compile Include="Models\Tables\GeschiedenisDetails.cs" />
     <Compile Include="Models\Tables\ResultatenAfbeelding.cs" />
     <Compile Include="Models\Tables\Speler.cs" />
-    <Compile Include="Models\Tables\Punten.cs" />
+    <Compile Include="Models\Tables\TotaalPuntenSpeler.cs" />
     <Compile Include="Models\Tables\UserNameSpel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\wwgService.cs" />
@@ -458,6 +458,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Images\" />
+    <Folder Include="Models\Games\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

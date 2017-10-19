@@ -26,6 +26,14 @@ namespace WorldWideGamerMVC.Models.Tables
         public Game Spel { get; set; }
         public int GameId { get; set; }
 
+        [Key, ForeignKey("TotaalPuntenSpelerId")]
+        public TotaalPuntenSpeler totaalPunten { get; set; }
+        public int TotaalPuntenSpelerId { get; set; }
+
         public int TeamId { get; set; }
+
+        public string puntenStringVorm { get; set; }
+
+        public double geconverteerdePunten { get; set; }
     }
 }
