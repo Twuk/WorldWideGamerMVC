@@ -21,7 +21,13 @@ namespace WorldWideGamerMVC.Migrations
 
         protected override void Seed(WorldWideGamerMVC.Models.ApplicationDbContext context)
         {
-
+            if (context.Users.Any(u => u.UserName == "tdorchain@gmail.com"))
+            {
+                var store = new UserStore<ApplicationUser>(context);
+                var manager = new UserManager<ApplicationUser>(store);
+                var user = context.Users.Where(u => u.Email == "tdorchain@gmail.com").First();
+                manager.AddToRole(user.Id, "Admin");
+            }
             /*
         var store = new UserStore<ApplicationUser>(context);
         var manager = new ApplicationUserManager(store);
@@ -30,7 +36,7 @@ namespace WorldWideGamerMVC.Migrations
         manager.Create(user, "Demiete6");
         var result = manager.AddToRole(user.Id, "Admin");
 
-        var speler2 = new Speler { FirstName = "Joriek", LastName = "Rogge" };
+        var speler2 = new Speler { FirstN"Joriek", LastName = "Rogge" };
         var user2 = new ApplicationUser() { Email = "joriek_rogge@gmail.com", UserName = "joriek_rogge@gmail.com", speler = speler2 };
         manager.Create(user2, "Demiete6");
 
@@ -47,7 +53,7 @@ namespace WorldWideGamerMVC.Migrations
 
             var spel4 = new Game() { Naam = "League of Legends", Regels = "Regels voor League of Legends", TeamSpel = true, ImageLink = "../../Images/League_of_Legends.jpg" };
             context.Games.Add(spel4);
-            context.SaveChanges();
+            context.SaveChanges();ame = 
 
             var spel5 = new Game() { Naam = "Fifa", Regels = "Regels voor Fifa", TeamSpel = false, ImageLink = "" };
             context.Games.Add(spel5);
