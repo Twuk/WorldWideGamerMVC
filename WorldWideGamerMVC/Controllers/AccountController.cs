@@ -183,6 +183,7 @@ namespace WorldWideGamerMVC.Controllers
                 var speler = new Speler { FirstName = model.FirstName, LastName = model.LastName, SpeeltGames = userNames };
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email, speler = speler };
                 var result = await UserManager.CreateAsync(user, model.Password);
+                
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
@@ -192,7 +193,7 @@ namespace WorldWideGamerMVC.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                   
+                    //result = UserManager.AddToRole(user.Id, "Admin");
                     return RedirectToAction("Index", "Home");
                 }
                 ViewBag.Name = new SelectList(databaseConnectie.Roles.Where(u => !u.Name.Contains("Admin"))

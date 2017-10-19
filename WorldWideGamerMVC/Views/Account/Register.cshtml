@@ -66,7 +66,7 @@
                         @Html.Label(Model.games[i].naam, new { @class = "col-md-2 control-label" })
                         @Html.HiddenFor(m => m.userNamePerSpel[Model.games[i].gameId].GameId, new { Value = Model.games[i].gameId })
                         <div class="col-md-10">
-                            @Html.TextBoxFor(m => m.userNamePerSpel[Model.games[i].gameId].userName, new { @class = "form-control" })
+                            @Html.TextBoxFor(m => m.userNamePerSpel[Model.games[i].gameId].UserName, new { @class = "form-control" })
                         </div>
                     </div>
                 }
