@@ -1,7 +1,54 @@
-﻿
+﻿@using WorldWideGamerMVC.ViewModels
+@model WorldWideGamerMVC.ViewModels.Geschiedenis.AanvraagSpelSpelersViewModel
 @{
     ViewBag.Title = "AanvraagHS";
 }
 
 <h2>AanvraagHS</h2>
 
+@using (Html.BeginForm("Aanvraag", "Geschiedenis", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    <div class="col-md-5">
+        <div>@Html.Label("Speler 1")</div>
+        @Html.Hidden("UserId", Model.UserId)
+            @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
+    </div>
+    <div class="col-md-2">
+        <div>@Html.Label("Versus")</div>
+    </div>
+    <div class="col-md-5">
+        <div class="form-group">
+            <div>@Html.Label("Speler 2", htmlAttributes: new { @class = "control-label col-md-2" })</div>
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.UserId, Model.Tegenstander, new { @class = "selectpicker", @id = "tegenstanderSelect" })
+            </div>
+        </div>
+    </div>
+    <div class="btn-group" data-toggle="buttons">
+        <label class="btn btn-primary active">
+            <input type="radio" name="options" id="option1" autocomplete="off" checked>@Model.UserName
+        </label>
+        <label class="btn btn-primary">
+            <input type="radio" name="options" id="option2" autocomplete="off">
+        </label>
+    </div>
+ }
+@section Scripts {
+    <script type="text/javascript">
+        window.onload = function () {
+            alert("iets");
+            setAantalSpelers();
+        };
+        $('#tegenstanderSelect').on('changed.bs.select', function (e) {
+            setTegenstanderWinner();
+
+        });
+        function setTegenstanderWinner() {
+            var tegenstander = $('#tegenstanderSelect').val();
+            alert(tegenstander);
+            $('#option2').text(tegenstander);
+        };
+
+    </script>
+}

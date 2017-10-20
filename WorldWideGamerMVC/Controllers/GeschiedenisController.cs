@@ -58,9 +58,9 @@ namespace WorldWideGamerMVC.Controllers
                     case 1:
                         return AanvraagAoe(model);
                     case 2:
-                        return AanvraagHS(model);
-                    case 3:
                         break;
+                    case 3:
+                        return AanvraagHS(model);
                     case 4:
                         break;
                     case 5:
@@ -76,6 +76,8 @@ namespace WorldWideGamerMVC.Controllers
         public ActionResult AanvraagAoe(AanvraagSpelSpelersViewModel model)
         {
             AanvraagAoEViewModel volgendeAanvraag = new AanvraagAoEViewModel();
+            Speler ingediende = gamerBal.GetGamer(model.UserId);
+            model.UserName = ingediende.SpeeltGames.Where(u => u.GameId == model.GameId).First().UserName;
             volgendeAanvraag.AantalSpelers = model.AantalSpelers;
             volgendeAanvraag.GameId = model.GameId;
             Game spel = new Game();
@@ -111,7 +113,10 @@ namespace WorldWideGamerMVC.Controllers
 
         public ActionResult AanvraagHS(AanvraagSpelSpelersViewModel model)
         {
-            AanvraagHSViewModel volgendeAanvraag = new AanvraagHSViewModel();
+            AanvraagSpelSpelersViewModel volgendeAanvraag = new AanvraagSpelSpelersViewModel();
+
+            Speler ingediende = gamerBal.GetGamer(model.UserId);
+            volgendeAanvraag.UserName = ingediende.SpeeltGames.Where(u => u.GameId == model.GameId).First().UserName;
             volgendeAanvraag.GameId = model.GameId;
             Game spel = new Game();
             spel = gameBal.getGame(model.GameId);
@@ -141,7 +146,7 @@ namespace WorldWideGamerMVC.Controllers
                 string errorMessage = "Er zijn niet zoveel spelers geregistreerd voor " + spel.Naam;
                 return View("Error", new ErrorViewModel(errorMessage));
             }
-            return View("AanvraagAoE", volgendeAanvraag);
+            return View("AanvraagHS", volgendeAanvraag);
         }
 
         public void saveImage (HttpPostedFileBase image, string spelnaam)

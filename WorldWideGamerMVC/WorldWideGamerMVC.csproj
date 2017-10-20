@@ -265,6 +265,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BusinessLayer\GameBusinessLayer.cs" />
     <Compile Include="Models\BusinessLayer\GamerBusinessLayer.cs" />
+    <Compile Include="Models\Games\HearthStone.cs" />
     <Compile Include="Models\HulpMethods\FillViewsMethods.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -458,7 +459,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Images\" />
-    <Folder Include="Models\Games\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

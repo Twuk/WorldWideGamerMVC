@@ -7,5 +7,6 @@ namespace WorldWideGamerMVC.Models.Games
 {
     public class HearthStone
     {
+
     }
 }

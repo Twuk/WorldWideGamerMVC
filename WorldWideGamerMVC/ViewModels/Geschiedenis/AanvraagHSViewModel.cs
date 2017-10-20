@@ -10,12 +10,14 @@ namespace WorldWideGamerMVC.ViewModels.Geschiedenis
     public class AanvraagHSViewModel
     {
         public string UserId { get; set; }
+        public int TeamID { get; set; }
+        public int GameId { get; set; }
 
+        public int AantalSpelers { get; set; }
         public List<SelectListItem> Tegenstander { get; set; }
+        public List<SelectListItem> meeGespeeldeSpelers { get; set; }
 
         public Speler Winnaar { get; set; }
-
-        public int GameId { get; set; }
 
         public HttpPostedFileBase Image { get; set; }
     }

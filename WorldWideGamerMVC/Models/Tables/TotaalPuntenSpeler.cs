@@ -19,37 +19,33 @@ namespace WorldWideGamerMVC.Models.Tables
 
         public ICollection<GeschiedenisDetails> Details { get; set; }
 
-        public double bonuspunten
+        public const double TOTAALPUNTEN = 20;
+
+        public double Bonuspunten
         {
             get
             {
-                return this.bonuspunten;
+                return this.Bonuspunten;
             }
             set
             {
-                this.bonuspunten = Details.GroupBy(u => u.GameId).Count() * 5;
+                this.Bonuspunten = Details.GroupBy(u => u.GameId).Count() * 5;
             }
-        }
-
-        public double getTotaalPunten()
-        {
-           double totaalpunten = 0;
-           foreach(var detail in Details)
-            {
-                totaalpunten += detail.geconverteerdePunten;
-            }
-            return totaalpunten;
         }
 
         //Dit wordt een fucking moeilijke methode want we moeten kijken afhankelijk van spel convertie gaan doen
-        public double getTotaalPuntenSpel(int spelId)
+        public double GetTotaalPuntenSpel(int spelId)
         {
+            double totaalpuntenSpel = 0;
             switch (spelId) {
                 case 1:
+                   
                     break;
                 case 2:
+                    
                     break;
                 case 3:
+                    totaalpuntenSpel = HearthStoneConvertie();
                     break;
                 case 4:
                     break;
@@ -57,12 +53,17 @@ namespace WorldWideGamerMVC.Models.Tables
                     break;
 
             }
-            double totaalpuntenSpel = 0;
-            foreach (var detail in Details.Where(d => d.GameId == spelId))
-            {
-                totaalpuntenSpel += detail.geconverteerdePunten;
-            }
             return totaalpuntenSpel;
+        }
+
+        public double HearthStoneConvertie()
+        {
+            //20/Totaal gespeelde spellen van alles speler * aantal gewonnen + totaal gespeelde spellen
+            IEnumerable<GeschiedenisDetails> gespeeldeGamesHS = Details.Where(u => u.GameId == 3);
+            int totaalGespeeldeGames = gespeeldeGamesHS.Count()/2;
+            int aantalGewonnen = gespeeldeGamesHS.Where(u => u.UserId == UserId).Where(u => u.Geschiedenis.GewonnenSpeler == UserId).Count();
+            int zelfGespeeldeGames = gespeeldeGamesHS.Where(u => u.UserId == UserId).Count();
+            return (TOTAALPUNTEN / totaalGespeeldeGames * aantalGewonnen) + zelfGespeeldeGames;
         }
     }
 }

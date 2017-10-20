@@ -12,7 +12,7 @@ namespace WorldWideGamerMVC.Models.Tables
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int GeschiedenisId { get; set; }
-        public int GewonnenSpeler { get; set; }
+        public string GewonnenSpeler { get; set; }
         public int GewonnenTeam { get; set; }
         
         public DateTime TimeStamp { get; set; }
