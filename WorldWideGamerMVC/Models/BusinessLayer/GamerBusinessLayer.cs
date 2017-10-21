@@ -30,6 +30,11 @@ namespace WorldWideGamerMVC.Models.BusinessLayer
         {
             return databaseConnectionClass.GetGamer(gamerId);
         }
+
+        public List<Game> GetGamerGames(string userId)
+        {
+            return databaseConnectionClass.GetGamerGames(userId);
+        }
         
         #endregion
 

@@ -19,3 +19,5 @@ FillDatabaseTest/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 *.pdb
 *.cache
 *.dll
+.vs/config/applicationhost.config
+WorldWideGamerMVC/Controllers/HomeController.cs

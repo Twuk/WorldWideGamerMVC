@@ -129,7 +129,7 @@ namespace WorldWideGamerMVC.Controllers
         {
             List<string> listA = new List<string>();
             List<string> listB = new List<string>();
-            using (var reader = new StreamReader(@"C:\Users\tom.dorchain\source\repos\WorldWideGamerMVC\FillDatabaseTest\NamenLijst.csv"))
+            using (var reader = new StreamReader(@"C:\Users\tom_d\Documents\GitHub\WorldWideGamerMVC\FillDatabaseTest\NamenLijst.csv"))
             {
 
                 while (!reader.EndOfStream)

@@ -34,7 +34,8 @@ namespace WorldWideGamerMVC.Controllers
             string userId = User.Identity.GetUserId();
             AanvraagSpelSpelersViewModel aanvraag = new AanvraagSpelSpelersViewModel();
             List<GameViewModel> gameViewModels = new List<GameViewModel>();
-            foreach(var spel in gameBal.getGames())
+            
+            foreach(var spel in gamerBal.GetGamerGames(userId))
             {
                 gameViewModels.Add(fillView.FillGameViewModel(spel));
             }

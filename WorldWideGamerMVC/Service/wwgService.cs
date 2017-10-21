@@ -51,6 +51,20 @@ namespace WorldWideGamerMVC.Service
             return speler;
         }
 
+        public List<Game> GetGamerGames(string userId)
+        {
+            List<Game> games = new List<Game>();
+            List<UserNameSpel> userNames = _ApplicationDb.SpelerGames.Where(u => u.UserId == userId).ToList();
+
+            foreach (UserNameSpel tussen in userNames)
+            {
+                Game spel = _ApplicationDb.Games.First( u=> u.GameId == tussen.GameId);
+                games.Add(spel);
+            }
+            
+            return games;
+        }
+
         public void PostGamer(Speler gamer)
         {
             
@@ -132,6 +146,17 @@ namespace WorldWideGamerMVC.Service
             }
             spel.Spelers = userNames;
             return spel;
+        }
+
+        public List<Speler> GetGameSpelers(int gameId)
+        {
+            List<Speler> spelers = new List<Speler>();
+            List<UserNameSpel> userNameSpelen = _ApplicationDb.SpelerGames.Where(u => u.GameId == gameId).ToList();
+            foreach (UserNameSpel tussen in userNameSpelen)
+            {
+                spelers.Add(_ApplicationDb.Spelers.Where(u => u.UserId == tussen.UserId).First());
+            }
+            return spelers;
         }
 
         public void SetSpelRegels(int gameId, string regels)
