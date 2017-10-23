@@ -150,6 +150,12 @@ namespace WorldWideGamerMVC.Controllers
             return View("AanvraagHS", volgendeAanvraag);
         }
 
+
+        [HttpPost]
+        public ActionResult SaveAanvraag(AanvraagSpelSpelersViewModel model)
+        {
+            return null;
+        }
         public void saveImage (HttpPostedFileBase image, string spelnaam)
         {
             string displayName = image.FileName;

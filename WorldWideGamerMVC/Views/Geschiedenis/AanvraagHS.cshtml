@@ -6,34 +6,47 @@
 
 <h2>AanvraagHS</h2>
 
-@using (Html.BeginForm("Aanvraag", "Geschiedenis", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("SaveAanvraag", "Geschiedenis", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-
-    <div class="col-md-5">
-        <div>@Html.Label("Speler 1")</div>
-        @Html.Hidden("UserId", Model.UserId)
+    <div class="row">
+        <div class="col-md-5">
+            <div>@Html.Label("Speler 1")</div>
+            @Html.Hidden("UserId", Model.UserId)
+            @Html.Hidden("GameId", Model.GameId)
             @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
-    </div>
-    <div class="col-md-2">
-        <div>@Html.Label("Versus")</div>
-    </div>
-    <div class="col-md-5">
-        <div class="form-group">
-            <div>@Html.Label("Speler 2", htmlAttributes: new { @class = "control-label col-md-2" })</div>
-            <div class="col-md-10">
-                @Html.DropDownListFor(m => m.UserId, Model.Tegenstander, new { @class = "selectpicker", @id = "tegenstanderSelect" })
+        </div>
+        <div class="col-md-2">
+            <div>@Html.Label("Versus")</div>
+        </div>
+        <div class="col-md-5">
+            <div class="form-group">
+                <div>@Html.Label("Speler 2", htmlAttributes: new { @class = "control-label col-md-2" })</div>
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.Tegenstander, Model.Tegenstander, new { @class = "selectpicker", @id = "tegenstanderSelect" })
+                </div>
             </div>
         </div>
     </div>
-    <div class="btn-group" data-toggle="buttons">
-        <label class="btn btn-primary active">
-            <input type="radio" name="options" id="option1" autocomplete="off" checked>@Model.UserName
-        </label>
-        <label class="btn btn-primary">
-            <input type="radio" name="options" id="option2" autocomplete="off">
-        </label>
+
+        <div class="row" data-toggle="buttons">
+
+                <label class="btn btn-primary">
+
+                    @Html.RadioButtonFor(u => u.Winnaar, Model.UserName, new { id = "optie1",autocomplete = "off", @checked = true })
+                    <label for="optie1">@Model.UserName</label>
+                </label>
+            <label class="btn btn-primary">
+
+                @Html.RadioButtonFor(u => u.Winnaar, "2", new { id = "optie2", autocomplete = "off" })
+                <label id="opties2" for="optie2"></label>
+            </label>
+        </div>
+
+
+    <div class="row">
+        <input type="submit" class="btn btn-success" value="Register" />
     </div>
- }
+}
 @section Scripts {
     <script type="text/javascript">
         window.onload = function () {
@@ -44,11 +57,15 @@
 
         });
         function setTegenstanderWinner() {
-            var tegenstander = $('#tegenstanderSelect').val();
-            alert(tegenstander);
-            var check = ('#option2');
-            alert(check);
+            $("#opties2").empty();
+            $("#opties2").append(getSelectedText('tegenstanderSelect'));
         };
+        function getSelectedText(elementId) {
+            var elt = document.getElementById(elementId);
+            if (elt.selectedIndex == -1)
+                return null;
 
+            return elt.options[elt.selectedIndex].text;
+        };
     </script>
 }
