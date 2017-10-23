@@ -19,4 +19,10 @@ FillDatabaseTest/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 *.pdb
 *.cache
 *.dll
+<<<<<<< HEAD
 .vs/WorldWideGamerMVC/v15/.suo
+=======
+.vs/config/applicationhost.config
+WorldWideGamerMVC/Controllers/HomeController.cs
+>>>>>>> 20be061e78ad22c0b53df31b20369dac657ae7ed
+*.config

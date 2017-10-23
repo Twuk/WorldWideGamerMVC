@@ -37,8 +37,7 @@
 @section Scripts {
     <script type="text/javascript">
         window.onload = function () {
-            alert("iets");
-            setAantalSpelers();
+            setTegenstanderWinner();
         };
         $('#tegenstanderSelect').on('changed.bs.select', function (e) {
             setTegenstanderWinner();
@@ -47,7 +46,8 @@
         function setTegenstanderWinner() {
             var tegenstander = $('#tegenstanderSelect').val();
             alert(tegenstander);
-            $('#option2').text(tegenstander);
+            var check = ('#option2');
+            alert(check);
         };
 
     </script>
