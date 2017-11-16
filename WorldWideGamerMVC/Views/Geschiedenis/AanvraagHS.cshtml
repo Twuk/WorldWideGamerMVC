@@ -10,7 +10,7 @@
 {
     <div class="row">
         <div class="col-md-5">
-            <div>@Html.Label(WorldWideGamerMVC.Resources.Aanvraag.Speler1)</div>
+            <div>@Html.Label("")</div>
             @Html.Hidden("UserId", Model.UserId)
             @Html.Hidden("GameId", Model.GameId)
             @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
@@ -20,7 +20,7 @@
         </div>
         <div class="col-md-5">
             <div class="form-group">
-                <div>@Html.Label(WorldWideGamerMVC.Resources.Aanvraag.Speler2, htmlAttributes: new { @class = "control-label col-md-2" })</div>
+                <div>@Html.Label("", htmlAttributes: new { @class = "control-label col-md-2" })</div>
                 <div class="col-md-10">
                     @Html.DropDownListFor(m => m.Tegenstander, Model.Tegenstander, new { @class = "selectpicker", @id = "tegenstanderSelect" })
                 </div>
@@ -28,7 +28,7 @@
         </div>
     </div>
     <div class="col-md-offset-3">
-        @WorldWideGamerMVC.Resources.Aanvraag.Winnaar
+
     </div>
 
         <div class="row" data-toggle="buttons">

@@ -50,8 +50,7 @@ namespace WorldWideGamerMVC.Controllers
         public ActionResult DetailGame(int gameId)
         {
             Game spel;
-            if (gameId != null)
-            {
+           
                spel = gameBal.getGame(gameId);
                 if (spel != null)
                 {
@@ -63,7 +62,7 @@ namespace WorldWideGamerMVC.Controllers
                     }
                     return View("DetailGame", gameView);
                 }
-            }
+           
             return GamesOverzicht() ;
         }
 
