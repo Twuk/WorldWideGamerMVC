@@ -1,5 +1,5 @@
-﻿@using WorldWideGamerMVC.ViewModels
-@model WorldWideGamerMVC.ViewModels.Geschiedenis.AanvraagSpelSpelersViewModel
+﻿@model WorldWideGamerMVC.ViewModels.Geschiedenis.AanvraagSpelSpelersViewModel
+
 @{
     ViewBag.Title = "AanvraagHS";
 }
@@ -10,7 +10,7 @@
 {
     <div class="row">
         <div class="col-md-5">
-            <div>@Html.Label("Speler 1")</div>
+            <div>@Html.Label(WorldWideGamerMVC.Resources.Aanvraag.Speler1)</div>
             @Html.Hidden("UserId", Model.UserId)
             @Html.Hidden("GameId", Model.GameId)
             @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
@@ -20,32 +20,40 @@
         </div>
         <div class="col-md-5">
             <div class="form-group">
-                <div>@Html.Label("Speler 2", htmlAttributes: new { @class = "control-label col-md-2" })</div>
+                <div>@Html.Label(WorldWideGamerMVC.Resources.Aanvraag.Speler2, htmlAttributes: new { @class = "control-label col-md-2" })</div>
                 <div class="col-md-10">
                     @Html.DropDownListFor(m => m.Tegenstander, Model.Tegenstander, new { @class = "selectpicker", @id = "tegenstanderSelect" })
                 </div>
             </div>
         </div>
     </div>
+    <div class="col-md-offset-3">
+        @WorldWideGamerMVC.Resources.Aanvraag.Winnaar
+    </div>
 
         <div class="row" data-toggle="buttons">
-
+            <div class="col-md-6">
                 <label class="btn btn-primary">
 
-                    @Html.RadioButtonFor(u => u.Winnaar, Model.UserName, new { id = "optie1",autocomplete = "off", @checked = true })
+                    @Html.RadioButtonFor(u => u.Winnaar, Model.UserName, new { id = "optie1", autocomplete = "off", @checked = true })
                     <label for="optie1">@Model.UserName</label>
                 </label>
-            <label class="btn btn-primary">
+            </div>
+            <div class="col-md-6">
+                <label class="btn btn-primary">
 
-                @Html.RadioButtonFor(u => u.Winnaar, "2", new { id = "optie2", autocomplete = "off" })
-                <label id="opties2" for="optie2"></label>
-            </label>
-        </div>
+                    @Html.RadioButtonFor(u => u.Winnaar, "2", new { id = "optie2", autocomplete = "off" })
+                    <label id="opties2" for="optie2"></label>
+                </label>
+                </div>
+            </div>
 
 
     <div class="row">
-        <input type="submit" class="btn btn-success" value="Register" />
-    </div>
+        <div class="col-md-6">
+            <input type="submit" class="btn btn-success" value="Register" />
+            </div>
+        </div>
 }
 @section Scripts {
     <script type="text/javascript">
