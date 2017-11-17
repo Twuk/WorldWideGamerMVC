@@ -263,6 +263,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BusinessLayer\GameBusinessLayer.cs" />
     <Compile Include="Models\BusinessLayer\GamerBusinessLayer.cs" />
+    <Compile Include="Models\BusinessLayer\GeschiedenisBusinessLayer.cs" />
     <Compile Include="Models\Games\HearthStone.cs" />
     <Compile Include="Models\HulpMethods\FillViewsMethods.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -461,6 +462,12 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WorldWideGamerMVC.Resources\WorldWideGamerMVC.Resources.csproj">
+      <Project>{2e57018f-f014-4189-a72a-6286e71f4cd1}</Project>
+      <Name>WorldWideGamerMVC.Resources</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

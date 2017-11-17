@@ -18,7 +18,7 @@ namespace WorldWideGamerMVC.ViewModels.Geschiedenis
         public List<SelectListItem> Tegenstander { get; set; }
         public List<SelectListItem> meeGespeeldeSpelers { get; set; }
         public string Winnaar { get; set; }
-
+        public string SelectedTegenstander { get; set; }
         public List<GameViewModel> AlleGames { get; set; }
 
         public HttpPostedFileBase Image { get; set; }

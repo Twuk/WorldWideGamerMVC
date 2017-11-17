@@ -190,5 +190,12 @@ namespace WorldWideGamerMVC.Service
             return allUserNames;
         }
         #endregion
+
+        #region Geschiedenis
+        public void PostHearthstone()
+        {
+
+        }
+#endregion
     }
 }

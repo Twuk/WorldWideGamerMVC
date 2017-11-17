@@ -152,8 +152,18 @@ namespace WorldWideGamerMVC.Controllers
 
 
         [HttpPost]
-        public ActionResult SaveAanvraag(AanvraagSpelSpelersViewModel model)
+        public ActionResult SaveAanvraagHS(AanvraagSpelSpelersViewModel model)
         {
+            string Winnaar = "";
+            if(model.Winnaar != "2")
+            {
+                Winnaar = model.UserId;
+            }
+            else
+            {
+                Winnaar = model.SelectedTegenstander;
+            }
+
             return null;
         }
         public void saveImage (HttpPostedFileBase image, string spelnaam)

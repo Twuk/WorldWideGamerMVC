@@ -1,0 +1,8 @@
+C:\Users\tom.dorchain\source\repos\WorldWideGamerMVC\WorldWideGamerMVC.Resources\bin\Debug\WorldWideGamerMVC.Resources.dll
+C:\Users\tom.dorchain\source\repos\WorldWideGamerMVC\WorldWideGamerMVC.Resources\bin\Debug\WorldWideGamerMVC.Resources.pdb
+C:\Users\tom.dorchain\source\repos\WorldWideGamerMVC\WorldWideGamerMVC.Resources\obj\Debug\WorldWideGamerMVC.Resources.csprojResolveAssemblyReference.cache
+C:\Users\tom.dorchain\source\repos\WorldWideGamerMVC\WorldWideGamerMVC.Resources\obj\Debug\WorldWideGamerMVC.Resources.Aanvraag.resources
+C:\Users\tom.dorchain\source\repos\WorldWideGamerMVC\WorldWideGamerMVC.Resources\obj\Debug\WorldWideGamerMVC.Resources.csproj.GenerateResource.Cache
+C:\Users\tom.dorchain\source\repos\WorldWideGamerMVC\WorldWideGamerMVC.Resources\obj\Debug\WorldWideGamerMVC.Resources.csproj.CoreCompileInputs.cache
+C:\Users\tom.dorchain\source\repos\WorldWideGamerMVC\WorldWideGamerMVC.Resources\obj\Debug\WorldWideGamerMVC.Resources.dll
+C:\Users\tom.dorchain\source\repos\WorldWideGamerMVC\WorldWideGamerMVC.Resources\obj\Debug\WorldWideGamerMVC.Resources.pdb
